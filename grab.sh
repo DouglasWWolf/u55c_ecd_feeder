@@ -1,5 +1,5 @@
 dest=bitstream
-base=u55c_dual_pcie
+base=u55c_ecd_feeder
 
 mkdir $dest 2>/dev/null
 
