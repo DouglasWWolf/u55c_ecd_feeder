@@ -7,6 +7,87 @@
 
 
 //
+// Register:    RTL_MAJOR
+// Size:        32-bits
+// Type:        Read/Write
+// Description: "major" portion of RTL revision "major.minor.build"
+//
+#define RTL_MAJOR                                                    0x0000000000000000ULL
+
+
+//
+// Register:    RTL_MINOR
+// Size:        32-bits
+// Type:        Read/Write
+// Description: "minor" portion of RTL revision "major.minor.build"
+//
+#define RTL_MINOR                                                    0x0000000000000004ULL
+
+
+//
+// Register:    RTL_BUILD
+// Size:        32-bits
+// Type:        Read/Write
+// Description: "build" portion of RTL revision "major.minor.build"
+//
+#define RTL_BUILD                                                    0x0000000000000008ULL
+
+
+//
+// Register:    RTL_DATE
+// Size:        32-bits
+// Type:        Read/Write
+// Description: Build date
+//
+// Fields:
+//     NAME                           WID   POS TYPE RESET       DESCRIPTION
+//     month                          8   31:24 RO   N/A         Build month (1 thru 12)
+//     day                            8   23:16 RO   N/A         Build date  (1 thru 31)
+//     year                           16  15:00 RO   N/A         Build year  (4 digit year)
+//
+#define RTL_DATE                                                     0x0000000000000010ULL
+#define RTL_DATE_month                                               0x0818000000000010ULL
+#define RTL_DATE_day                                                 0x0810000000000010ULL
+#define RTL_DATE_year                                                0x1000000000000010ULL
+
+
+//
+// Register:    RTL_TYPE
+// Size:        32-bits
+// Type:        Read/Write
+// Description: Uniquely identifies this RTL design
+//
+#define RTL_TYPE                                                     0x0000000000000014ULL
+
+
+//
+// Register:    RTL_TIME
+// Size:        32-bits
+// Type:        Read/Write
+// Description: Build date
+//
+// Fields:
+//     NAME                           WID   POS TYPE RESET       DESCRIPTION
+//     hour                           8   23:16 RO   N/A         Build hour   (0 thru 23)
+//     min                            8   15:08 RO   N/A         Build minute (0 thru 59)
+//     sec                            8   07:00 RO   N/A         Build second (0 thru 59)
+//
+#define RTL_TIME                                                     0x000000000000001cULL
+#define RTL_TIME_hour                                                0x081000000000001cULL
+#define RTL_TIME_min                                                 0x080800000000001cULL
+#define RTL_TIME_sec                                                 0x080000000000001cULL
+
+
+//
+// Register:    RTL_GIT_HASH
+// Size:        This is an array of five consecutive 32-bit registers
+// Type:        Read/Write
+// Description: Git commit hash
+//
+#define RTL_GIT_HASH                                                 0x0000000000000040ULL
+
+
+//
 // Register:    REG_USE_SIM_DATA
 // Size:        32-bits
 // Type:        Read/Write
