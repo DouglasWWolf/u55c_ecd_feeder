@@ -142,7 +142,7 @@ end
 //=============================================================================
 
 // The number of AXI bursts in a host-frame
-wire[31:0] bursts_per_half_frame = (host_frame_size / BURST_SIZE * 2);
+wire[31:0] bursts_per_half_frame = (host_frame_size / 2) / BURST_SIZE;
 
 // This is the burst number within a single half-frame
 reg[31:0] burst_within_frame;
