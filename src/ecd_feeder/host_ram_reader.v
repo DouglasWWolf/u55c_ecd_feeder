@@ -323,10 +323,7 @@ end
 // This computes the *next* value for "sim_data"
 //=============================================================================
 always @* begin
-    if (sim_data == last_bank_offset)
-        next_sim_data = FIRST_RAM_OFFSET;
-    else
-        next_sim_data = sim_data + 64 + ((M_AXI_RLAST) ? BURST_SIZE : 0);
+    next_sim_data = sim_data + 64 + ((M_AXI_RLAST) ? BURST_SIZE : 0);
 end
 //=============================================================================
 
@@ -339,8 +336,12 @@ end
 always @(posedge clk) begin
     if (resetn == 0)
         sim_data <= FIRST_RAM_OFFSET;
-    else if (M_AXI_RREADY & M_AXI_RVALID)
-        sim_data <= next_sim_data;
+    else if (M_AXI_RREADY & M_AXI_RVALID) begin
+        if (next_sim_data >= fd_host_size)
+            sim_data <= FIRST_RAM_OFFSET;
+        else
+            sim_data <= next_sim_data;
+    end
 end
 //=============================================================================
 

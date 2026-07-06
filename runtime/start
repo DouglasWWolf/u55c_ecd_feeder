@@ -1,5 +1,7 @@
 source api
 
+axi REG_RESET 1
+sleep 1
 axi REG_USE_SIM_DATA 1
 axi REG_HOST_FRAME_SIZE 0x400000
 axi REG_START 1
