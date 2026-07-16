@@ -60,13 +60,13 @@ ecd()
         resp=$(get ECD_RESP)
         if [ $resp -ne 1 ]; then
             printf "During read of 0x%04X, error %u\n" $addr $resp 1>&2
-            return
+            return 1
         fi
         value=$(get ECD_RDATA)
         test $show -eq 1 && printf "0x%08X\n" $value && return
         test $show -eq 2 && printf "%u\n" $value && return
         test $show -eq 3 && printf "0x%08X (%u)\n" $value $value
-        return
+        return 0
     fi
 
     # This is a register write
@@ -78,8 +78,9 @@ ecd()
     resp=$(get ECD_RESP)
     if [ $resp -ne 1 ]; then
         printf "During write of 0x%04X, error %u\n" $addr $resp 1>&2
-        return
+        return 1
     fi
+    return 0
 }
 
 

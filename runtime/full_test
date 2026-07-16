@@ -1,10 +1,41 @@
 source api
 
+# In Doug's lab, after either ecd-feeder or ecdcom issues a reset, it 
+# takes several seconds for the Ethernet switch to reacquire the link
+# to the FPGA Ethernet MAC
+ethernet_switch_sleep=5
+
+
 # Reset the ecd-feeder and wait for the reset to complete
 axi REG_RESET 1
 while [ $(get REG_RESET) -eq 1 ]; do
     sleep .1  
 done
+
+# Wait for the ethernet switch
+if [ $ethernet_switch_sleep -ne 0 ]; then
+    echo "Waiting for Ethernet switch..."
+    sleep $ethernet_switch_sleep
+fi
+
+echo a
+
+# In Doug's ECD simulator, for technical reset, we have to manually
+# clear this flag
+ecd ECDCOM_SELFTEST_ERR 0
+
+echo b
+
+# Reset the ECD
+ecd ECDCOM_RESET 1
+echo c
+
+
+# Wait for the ethernet switch
+if [ $ethernet_switch_sleep -ne 0 ]; then
+    echo "Waiting for Ethernet switch..."
+    sleep $ethernet_switch_sleep
+fi
 
 # For tis test, ecd-feeder will use simulated data
 axi REG_USE_SIM_DATA 1
@@ -13,11 +44,28 @@ axi REG_USE_SIM_DATA 1
 axi REG_HOST_FRAME_SIZE 0x400000
 
 # Tell ecd-feeder to fill its buffers from host-RAM
+sleep 2
 axi REG_START 1
 
 # Wait for ecd-feeder to tell us it's ready
-while [ $(get REG_READY) -ne 1]; do
+while [ $(get REG_READY) -ne 1 ]; do
     sleep .1
 done
 
+# Tell ECD to fill its internal buffers
+ecd ECDCOM_START 1
+test $? -ne 0 && exit 1
 
+# Wait for ecd-feeder to tell us it's ready
+echo "ECD is filling its buffers"
+while [ $(ecd -dec ECDCOM_READY) -ne 1 ]; do
+    sleep .1
+done
+echo "Filled!"
+
+# Tell the ECD to demand a large number of frames of data
+ecd ECDCOM_GET_FRAMES 1000000
+
+
+
+./ecd_status
