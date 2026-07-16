@@ -1,5 +1,6 @@
 # Fetch our register definitions
 source bash_registers fpga_reg.h
+source bash_registers ecdcom_reg.h
 
 # A fancy interface to pcireg that understands register names
 axi()
@@ -28,3 +29,65 @@ get()
     pcireg -dec $addr $2 $3 $4    
 }
 
+ecd()
+{
+    local show=3;
+    if [ "$1" == "-hex" ]; then
+        shift
+        show=1
+    fi
+
+    if [ "$1" == "-dec" ]; then
+        shift
+        show=2
+    fi
+
+    # Fetch the address of the register
+    addr=$(($1))
+
+    # Store the register address we want to read or write
+    axi ECD_ADDR $addr
+    
+    # Fetch the value to write from the command line
+    local value=$2
+
+    # If this is a register read....
+    if [ -z $value ]; then
+        axi ECD_START_RW 0
+        while [ $(get ECD_RESP) -eq 0 ]; do
+            sleep .001
+        done
+        resp=$(get ECD_RESP)
+        if [ $resp -ne 1 ]; then
+            printf "During read of 0x%04X, error %u\n" $addr $resp 1>&2
+            return
+        fi
+        value=$(get ECD_RDATA)
+        test $show -eq 1 && printf "0x%08X\n" $value && return
+        test $show -eq 2 && printf "%u\n" $value && return
+        test $show -eq 3 && printf "0x%08X (%u)\n" $value $value
+        return
+    fi
+
+    # This is a register write
+    axi ECD_WDATA $value
+    axi ECD_START_RW 1
+    while [ $(get ECD_RESP) -eq 0 ]; do
+        sleep .001
+    done
+    resp=$(get ECD_RESP)
+    if [ $resp -ne 1 ]; then
+        printf "During write of 0x%04X, error %u\n" $addr $resp 1>&2
+        return
+    fi
+}
+
+
+# This fetches a 64-bit value from a remote register
+ecd_get64()
+{
+    addr=$(($1))
+    v1=$(ecd -dec $addr)
+    v2=$(ecd -dec $((addr + 4)))
+    echo $(( (v1 << 32) | v2 ))
+}

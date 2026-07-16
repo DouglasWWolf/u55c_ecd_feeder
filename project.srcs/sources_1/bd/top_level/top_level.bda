@@ -424,6 +424,24 @@
             },
             "V16": {
                 "VT": "AC",
+                "BA": "0x0000000000003000",
+                "HA": "0x0000000000003FFF",
+                "BP": "C_BASEADDR",
+                "HP": "C_HIGHADDR",
+                "MA": "M_AXI_B",
+                "MX": "/pcie/pcie_bridge_0",
+                "MI": "M_AXI_B",
+                "MS": "SEG_axis_axi_ctl_reg0",
+                "MV": "xilinx.com:ip:xdma:4.1",
+                "SX": "/ecd_axi/axis_axi_ctl",
+                "SI": "S_AXI",
+                "SS": "reg0",
+                "SV": "xilinx.com:module_ref:axis_axi_ctl:1.0",
+                "TM": "both",
+                "TU": "register"
+            },
+            "V17": {
+                "VT": "AC",
                 "BA": "0x020000000",
                 "HA": "0x03FFFFFFF",
                 "BP": "C_BASEADDR",
@@ -440,7 +458,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V17": {
+            "V18": {
                 "VT": "AC",
                 "BA": "0x040000000",
                 "HA": "0x05FFFFFFF",
@@ -458,7 +476,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V18": {
+            "V19": {
                 "VT": "AC",
                 "BA": "0x060000000",
                 "HA": "0x07FFFFFFF",
@@ -476,7 +494,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V19": {
+            "V20": {
                 "VT": "AC",
                 "BA": "0x080000000",
                 "HA": "0x09FFFFFFF",
@@ -494,7 +512,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V20": {
+            "V21": {
                 "VT": "AC",
                 "BA": "0x0A0000000",
                 "HA": "0x0BFFFFFFF",
@@ -512,7 +530,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V21": {
+            "V22": {
                 "VT": "AC",
                 "BA": "0x0C0000000",
                 "HA": "0x0DFFFFFFF",
@@ -530,7 +548,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V22": {
+            "V23": {
                 "VT": "AC",
                 "BA": "0x0E0000000",
                 "HA": "0x0FFFFFFFF",
@@ -548,7 +566,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V23": {
+            "V24": {
                 "VT": "AC",
                 "BA": "0x100000000",
                 "HA": "0x11FFFFFFF",
@@ -566,7 +584,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V24": {
+            "V25": {
                 "VT": "AC",
                 "BA": "0x0000000100000000",
                 "HA": "0x00000001FFFFFFFF",
@@ -584,7 +602,7 @@
                 "TM": "both",
                 "TU": "register"
             },
-            "V25": {
+            "V26": {
                 "VT": "AC",
                 "BA": "0x0000000100000000",
                 "HA": "0x00000001FFFFFFFF",
@@ -602,7 +620,7 @@
                 "TM": "both",
                 "TU": "register"
             },
-            "V26": {
+            "V27": {
                 "VT": "AC",
                 "BA": "0x0000000100000000",
                 "HA": "0x00000001FFFFFFFF",
@@ -620,7 +638,7 @@
                 "TM": "both",
                 "TU": "register"
             },
-            "V27": {
+            "V28": {
                 "VT": "AC",
                 "BA": "0x0000000100000000",
                 "HA": "0x00000001FFFFFFFF",
@@ -638,7 +656,7 @@
                 "TM": "both",
                 "TU": "register"
             },
-            "V28": {
+            "V29": {
                 "VT": "AC",
                 "BA": "0x120000000",
                 "HA": "0x13FFFFFFF",
@@ -656,7 +674,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V29": {
+            "V30": {
                 "VT": "AC",
                 "BA": "0x140000000",
                 "HA": "0x15FFFFFFF",
@@ -674,7 +692,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V30": {
+            "V31": {
                 "VT": "AC",
                 "BA": "0x160000000",
                 "HA": "0x17FFFFFFF",
@@ -692,7 +710,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V31": {
+            "V32": {
                 "VT": "AC",
                 "BA": "0x180000000",
                 "HA": "0x19FFFFFFF",
@@ -710,7 +728,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V32": {
+            "V33": {
                 "VT": "AC",
                 "BA": "0x1A0000000",
                 "HA": "0x1BFFFFFFF",
@@ -728,7 +746,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V33": {
+            "V34": {
                 "VT": "AC",
                 "BA": "0x1C0000000",
                 "HA": "0x1DFFFFFFF",
@@ -746,7 +764,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V34": {
+            "V35": {
                 "VT": "AC",
                 "BA": "0x1E0000000",
                 "HA": "0x1FFFFFFFF",
@@ -764,7 +782,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V35": {
+            "V36": {
                 "VT": "AC",
                 "BA": "0x200000000",
                 "HA": "0x21FFFFFFF",
@@ -782,7 +800,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V36": {
+            "V37": {
                 "VT": "AC",
                 "BA": "0x220000000",
                 "HA": "0x23FFFFFFF",
@@ -800,7 +818,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V37": {
+            "V38": {
                 "VT": "AC",
                 "BA": "0x240000000",
                 "HA": "0x25FFFFFFF",
@@ -818,7 +836,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V38": {
+            "V39": {
                 "VT": "AC",
                 "BA": "0x260000000",
                 "HA": "0x27FFFFFFF",
@@ -836,7 +854,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V39": {
+            "V40": {
                 "VT": "AC",
                 "BA": "0x280000000",
                 "HA": "0x29FFFFFFF",
@@ -854,7 +872,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V40": {
+            "V41": {
                 "VT": "AC",
                 "BA": "0x2A0000000",
                 "HA": "0x2BFFFFFFF",
@@ -872,7 +890,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V41": {
+            "V42": {
                 "VT": "AC",
                 "BA": "0x2C0000000",
                 "HA": "0x2DFFFFFFF",
@@ -890,7 +908,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V42": {
+            "V43": {
                 "VT": "AC",
                 "BA": "0x2E0000000",
                 "HA": "0x2FFFFFFFF",
@@ -908,7 +926,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V43": {
+            "V44": {
                 "VT": "AC",
                 "BA": "0x300000000",
                 "HA": "0x31FFFFFFF",
@@ -926,7 +944,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V44": {
+            "V45": {
                 "VT": "AC",
                 "BA": "0x320000000",
                 "HA": "0x33FFFFFFF",
@@ -944,7 +962,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V45": {
+            "V46": {
                 "VT": "AC",
                 "BA": "0x340000000",
                 "HA": "0x35FFFFFFF",
@@ -962,7 +980,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V46": {
+            "V47": {
                 "VT": "AC",
                 "BA": "0x360000000",
                 "HA": "0x37FFFFFFF",
@@ -980,7 +998,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V47": {
+            "V48": {
                 "VT": "AC",
                 "BA": "0x380000000",
                 "HA": "0x39FFFFFFF",
@@ -998,7 +1016,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V48": {
+            "V49": {
                 "VT": "AC",
                 "BA": "0x3A0000000",
                 "HA": "0x3BFFFFFFF",
@@ -1016,7 +1034,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V49": {
+            "V50": {
                 "VT": "AC",
                 "BA": "0x3C0000000",
                 "HA": "0x3DFFFFFFF",
@@ -1034,7 +1052,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V50": {
+            "V51": {
                 "VT": "AC",
                 "BA": "0x3E0000000",
                 "HA": "0x3FFFFFFFF",
@@ -1299,6 +1317,11 @@
             },
             {
                 "src": "V50",
+                "trg": "V2",
+                "EH": "2"
+            },
+            {
+                "src": "V51",
                 "trg": "V2",
                 "EH": "2"
             }

@@ -286,5 +286,62 @@
 #define REG_CH1_MALFORMED                                            0x000000000000202cULL
 
 
+//
+// Register:    ECD_ADDR
+// Size:        32-bits
+// Type:        Read/Write
+// Description: The AXI address on the ECD
+//
+#define ECD_ADDR                                                     0x0000000000003000ULL
+
+
+//
+// Register:    ECD_WDATA
+// Size:        32-bits
+// Type:        Read/Write
+// Description: Data to be written to ECD register
+//
+#define ECD_WDATA                                                    0x0000000000003004ULL
+
+
+//
+// Register:    ECD_START_RW
+// Size:        32-bits
+// Type:        Read/Write
+// Description: Write a 0 to start an ECD register read or write a
+//              1 to start an ECD register write
+//
+#define ECD_START_RW                                                 0x0000000000003008ULL
+
+
+//
+// Register:    ECD_RESP
+// Size:        32-bits
+// Type:        Read only
+// Description: AXI transaction status
+//              0 = Not yet complete
+//              1 = Transaction complete and AXI OKAY
+//              3 = Transaction Timeout
+//              5 = Transaction complete and AXI SLVERR
+//              7 = Transaction complete and AXI DECERR
+//              Any other value = Ignore
+//
+#define ECD_RESP                                                     0x000000000000300cULL
+
+
+//
+// Register:    ECD_RDATA
+//              Data returned from reading an ECD register
+//
+#define ECD_RDATA                                                    0x0000000000003010ULL
+
+
+//
+// Register:    ECD_TIMEOUT
+//              ECD Register transaction timeout, in milliseconds
+//
+#define ECD_TIMEOUT                                                  0x0000000000003014ULL
+
+
 
 #endif

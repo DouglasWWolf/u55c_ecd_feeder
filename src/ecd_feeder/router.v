@@ -34,7 +34,13 @@ module router
     // This is a stream of command packets
     output[511:0]   axis_cmd_tdata,
     output          axis_cmd_tlast,
-    output          axis_cmd_tvalid
+    output          axis_cmd_tvalid,
+
+    // This is a stream of AXI4-Lite requests
+    output[511:0]   axis_axi_tdata,
+    output          axis_axi_tlast,
+    output          axis_axi_tvalid
+
 
 );
 
@@ -51,12 +57,14 @@ wire[15:0] payload_bytes;
 // These are bit-numbers in "route" and "tvalid"
 localparam UWD_BIT = 0;
 localparam CMD_BIT = 1;
-reg[1:0] route, tvalid;
+localparam AXI_BIT = 2;
+reg[2:0] route, tvalid;
 
 // One bit per output bus
 localparam ROUTE_DROP = 0;
 localparam ROUTE_UWD  = (1 << UWD_BIT);
 localparam ROUTE_CMD  = (1 << CMD_BIT);
+localparam ROUTE_AXI  = (1 << AXI_BIT);
 
 // Incoming data will be written into these registers
 reg[511:0] tdata;
@@ -71,6 +79,11 @@ assign axis_uwd_tlast  = tlast;
 assign axis_cmd_tvalid = tvalid[CMD_BIT];
 assign axis_cmd_tdata  = tdata;
 assign axis_cmd_tlast  = tlast;
+
+// Drive the AXI output stream
+assign axis_axi_tvalid = tvalid[AXI_BIT];
+assign axis_axi_tdata  = tdata;
+assign axis_axi_tlast  = tlast;
 
 
 //=============================================================================
@@ -116,21 +129,27 @@ always @(posedge clk) begin
     // want to keep the packet
     else if (sop) begin
 
-        // If we're not enabled or this is not an RDMX packet...
-        if (!(enable & is_rdmx))
-            route <= ROUTE_DROP;
+        // Always drop all non-RDMX packets
+        if (!is_rdmx) route <= ROUTE_DROP;
    
         // If this is a userwave-data packet...
-        else if (pkt_type == PT_UW_DATA) begin
+        else if (enable && pkt_type == PT_UW_DATA) begin
             tvalid <= ROUTE_UWD;
             route  <= ROUTE_UWD;
         end
 
         // If this is a command-packet...
-        else if (pkt_type == PT_COMMAND) begin
+        else if (enable && pkt_type == PT_COMMAND) begin
             tvalid <= ROUTE_CMD;
             route  <= ROUTE_CMD;
         end
+
+        // If this is an AXI request packet...
+        else if (pkt_type == PT_AXI_RSP) begin
+            tvalid <= ROUTE_AXI;
+            route  <= ROUTE_AXI;
+        end
+
 
         // Any other kind of packet gets dropped
         else route <= ROUTE_DROP;

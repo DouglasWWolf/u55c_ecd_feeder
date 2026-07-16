@@ -7,84 +7,62 @@
    "Display-PortTypeReset":"true",
    "DisplayTieOff":"1",
    "ExpandedHierarchyInLayout":"",
-   "No Loops_ExpandedHierarchyInLayout":"/ethernet/eth1",
+   "No Loops_ExpandedHierarchyInLayout":"",
    "No Loops_Layers":"/ethernet/eth1/cmac_usplus_0_gt_txusrclk2:true|/ethernet/eth0/cmac_usplus_0_gt_txusrclk2:true|/ethernet/eth1/cmac_control_0_rx_resetn_out:true|/ethernet/eth0/cmac_control_0_rx_resetn_out:true|/ethernet/eth0/cmac_control_0_reset_rx_datapath:true|/ethernet/eth1/cmac_control_0_reset_rx_datapath:true|",
    "No Loops_Layout":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
 #  -string -flagsOSRD
-preplace port qsfp0_gt -pg 1 -lvl 4 -x 2290 -y 160 -defaultsOSRD
-preplace port qsfp0_clk -pg 1 -lvl 4 -x 2290 -y 180 -defaultsOSRD -right
-preplace port axis_tx0 -pg 1 -lvl 0 -x 0 -y 150 -defaultsOSRD
-preplace port axis_rx0 -pg 1 -lvl 4 -x 2290 -y 60 -defaultsOSRD
-preplace port qsfp1_gt -pg 1 -lvl 4 -x 2290 -y 360 -defaultsOSRD
-preplace port qsfp1_clk -pg 1 -lvl 4 -x 2290 -y 380 -defaultsOSRD -right
-preplace port axis_rx1 -pg 1 -lvl 4 -x 2290 -y 480 -defaultsOSRD
-preplace port axis_tx1 -pg 1 -lvl 0 -x 0 -y 310 -defaultsOSRD
-preplace port port-id_sys_clk -pg 1 -lvl 0 -x 0 -y 330 -defaultsOSRD
-preplace port port-id_sys_resetn_in -pg 1 -lvl 0 -x 0 -y 350 -defaultsOSRD
-preplace port port-id_rx1_aligned -pg 1 -lvl 4 -x 2290 -y 400 -defaultsOSRD
-preplace port port-id_rx0_aligned -pg 1 -lvl 4 -x 2290 -y 200 -defaultsOSRD
-preplace portBus qsfp0_leds -pg 1 -lvl 4 -x 2290 -y 280 -defaultsOSRD
-preplace portBus qsfp1_leds -pg 1 -lvl 4 -x 2290 -y 300 -defaultsOSRD
-preplace portBus qsfp0_bad_packets -pg 1 -lvl 4 -x 2290 -y 220 -defaultsOSRD
-preplace portBus qsfp1_bad_packets -pg 1 -lvl 4 -x 2290 -y 420 -defaultsOSRD
-preplace inst eth0 -pg 1 -lvl 2 -x 590 -y 40 -swap {5 1 2 3 4 13 6 7 8 9 10 11 12 0 14 15 16 17 18 19 20 21 22 23} -defaultsOSRD -pinDir gt_serial_port right -pinY gt_serial_port 120R -pinDir gt_ref_clk right -pinY gt_ref_clk 140R -pinDir S_AXIS left -pinY S_AXIS 110L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir sys_clk left -pinY sys_clk 160L -pinDir sys_resetn_in left -pinY sys_resetn_in 180L -pinDir rx_aligned right -pinY rx_aligned 160R -pinBusDir bad_packet_count right -pinBusY bad_packet_count 180R
-preplace inst eth1 -pg 1 -lvl 2 -x 590 -y 330 -defaultsOSRD -pinDir gt_serial_port right -pinY gt_serial_port 190R -pinDir gt_ref_clk right -pinY gt_ref_clk 230R -pinDir S_AXIS left -pinY S_AXIS 570L -pinDir M_AXIS right -pinY M_AXIS 310R -pinDir sys_clk left -pinY sys_clk 590L -pinDir sys_resetn_in left -pinY sys_resetn_in 610L -pinDir rx_aligned right -pinY rx_aligned 330R -pinBusDir bad_packet_count right -pinBusY bad_packet_count 350R
-preplace inst uw_fifo -pg 1 -lvl 3 -x 2130 -y 460 -defaultsOSRD -pinDir S_AXIS left -pinY S_AXIS 20L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir s_axis_aresetn left -pinY s_axis_aresetn 40L -pinDir s_axis_aclk left -pinY s_axis_aclk 60L
-preplace inst rdmx_sequencer_0 -pg 1 -lvl 1 -x 170 -y 130 -defaultsOSRD -pinDir axis_in left -pinY axis_in 20L -pinDir axis_out right -pinY axis_out 20R -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L
-preplace inst rdmx_sequencer_1 -pg 1 -lvl 1 -x 170 -y 290 -defaultsOSRD -pinDir axis_in left -pinY axis_in 20L -pinDir axis_out right -pinY axis_out 60R -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L
-preplace inst cmd_fifo -pg 1 -lvl 3 -x 2130 -y 40 -defaultsOSRD -pinDir S_AXIS left -pinY S_AXIS 20L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir s_axis_aresetn left -pinY s_axis_aresetn 40L -pinDir s_axis_aclk left -pinY s_axis_aclk 60L
-preplace inst status_leds -pg 1 -lvl 3 -x 2130 -y 260 -defaultsOSRD -pinDir link0_up left -pinY link0_up 20L -pinDir link1_up left -pinY link1_up 40L -pinBusDir qsfp0_leds right -pinBusY qsfp0_leds 20R -pinBusDir qsfp1_leds right -pinBusY qsfp1_leds 40R
-preplace inst eth1|cmac_control -pg 1 -lvl 1 -x 670 -y 500 -swap {13 1 2 3 4 5 6 7 8 9 10 11 12 0 14 15 20 17 19 18 21 16 22} -defaultsOSRD -pinDir rs_fec right -pinY rs_fec 100R -pinDir ctl_tx right -pinY ctl_tx 40R -pinDir ctl_rx right -pinY ctl_rx 60R -pinDir gt_trans_debug right -pinY gt_trans_debug 80R -pinDir stat_rx right -pinY stat_rx 20R -pinDir init_clk left -pinY init_clk 280L -pinDir rx_clk right -pinY rx_clk 180R -pinDir sys_resetn_in left -pinY sys_resetn_in 300L -pinDir rx_reset_out right -pinY rx_reset_out 160R -pinDir rx_resetn_out right -pinY rx_resetn_out 140R -pinDir reset_rx_datapath right -pinY reset_rx_datapath 280R -pinDir sync_rx_aligned right -pinY sync_rx_aligned 120R -pinDir sys_reset_out right -pinY sys_reset_out 300R
-preplace inst eth1|cmac_usplus -pg 1 -lvl 2 -x 1110 -y 500 -swap {0 1 2 3 4 15 6 7 258 9 10 11 12 13 14 5 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 8 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 47 182 183 184 185 186 181 188 189 190 187 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 191 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 304 299 300 301 305 302 315 303 318 307 308 309 306 298 310 313 314 311 316 312 317} -defaultsOSRD -pinDir gt_serial_port right -pinY gt_serial_port 20R -pinDir gt_ref_clk right -pinY gt_ref_clk 60R -pinDir axis_tx left -pinY axis_tx 240L -pinDir axis_rx right -pinY axis_rx 40R -pinDir stat_tx right -pinY stat_tx 80R -pinDir stat_rx left -pinY stat_rx 20L -pinDir ctl_tx left -pinY ctl_tx 40L -pinDir ctl_rx left -pinY ctl_rx 60L -pinDir gt_trans_debug left -pinY gt_trans_debug 80L -pinDir gt_cmn_drp_0 left -pinY gt_cmn_drp_0 120L -pinDir gt_ch_drp_0 left -pinY gt_ch_drp_0 140L -pinDir gt_ch_drp_1 left -pinY gt_ch_drp_1 160L -pinDir gt_ch_drp_2 left -pinY gt_ch_drp_2 180L -pinDir gt_ch_drp_3 left -pinY gt_ch_drp_3 200L -pinDir core_drp left -pinY core_drp 220L -pinDir rs_fec_in left -pinY rs_fec_in 100L -pinDir rs_fec_out right -pinY rs_fec_out 100R -pinDir rx_otn_out right -pinY rx_otn_out 120R -pinDir gt_txusrclk2 right -pinY gt_txusrclk2 140R -pinBusDir gt_loopback_in left -pinBusY gt_loopback_in 320L -pinDir gt_ref_clk_out right -pinY gt_ref_clk_out 160R -pinBusDir gt_rxrecclkout right -pinBusY gt_rxrecclkout 180R -pinBusDir gt_powergoodout right -pinBusY gt_powergoodout 200R -pinDir gtwiz_reset_tx_datapath left -pinY gtwiz_reset_tx_datapath 340L -pinDir gtwiz_reset_rx_datapath left -pinY gtwiz_reset_rx_datapath 280L -pinDir gt_drpclk left -pinY gt_drpclk 440L -pinDir sys_reset left -pinY sys_reset 300L -pinDir init_clk left -pinY init_clk 480L -pinBusDir rx_preambleout right -pinBusY rx_preambleout 220R -pinDir usr_rx_reset right -pinY usr_rx_reset 240R -pinDir gt_rxusrclk2 right -pinY gt_rxusrclk2 260R -pinDir core_rx_reset left -pinY core_rx_reset 360L -pinDir rx_clk left -pinY rx_clk 260L -pinDir core_tx_reset left -pinY core_tx_reset 380L -pinDir tx_ovfout right -pinY tx_ovfout 280R -pinDir tx_unfout right -pinY tx_unfout 300R -pinBusDir tx_preamblein left -pinBusY tx_preamblein 400L -pinDir usr_tx_reset right -pinY usr_tx_reset 320R -pinDir core_drp_reset left -pinY core_drp_reset 420L -pinDir drp_clk left -pinY drp_clk 460L
-preplace inst eth1|tx_cdc_packetizer -pg 1 -lvl 1 -x 670 -y 880 -swap {0 1 2 3 4 5 6 7 8 9 11 10 13 12} -defaultsOSRD -pinDir S_AXIS left -pinY S_AXIS 20L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir sys_resetn_in left -pinY sys_resetn_in 60L -pinDir sys_clk left -pinY sys_clk 40L -pinDir cmac_clk right -pinY cmac_clk 60R -pinDir cmac_resetn right -pinY cmac_resetn 40R
-preplace inst eth1|rx_cdc -pg 1 -lvl 3 -x 1540 -y 620 -defaultsOSRD -pinDir S_AXIS left -pinY S_AXIS 20L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir cmac_clk left -pinY cmac_clk 40L -pinDir cmac_resetn left -pinY cmac_resetn 60L -pinDir sys_clk left -pinY sys_clk 80L -pinDir sys_resetn left -pinY sys_resetn 420L -pinBusDir bad_packet_count right -pinBusY bad_packet_count 60R
-preplace inst eth1|system_ila_1 -pg 1 -lvl 3 -x 1540 -y 360 -swap {0 1 2 3 4 5 6 7 8 9 10 12 11} -defaultsOSRD -pinDir SLOT_0_AXIS left -pinY SLOT_0_AXIS 20L -pinDir SLOT_1_AXIS left -pinY SLOT_1_AXIS 60L -pinDir clk left -pinY clk 100L -pinDir resetn left -pinY resetn 80L
-preplace netloc eth0_bad_packet_count 1 2 2 NJ 220 NJ
-preplace netloc eth0_rx_aligned 1 2 2 1990 200 NJ
-preplace netloc eth1_bad_packet_count 1 2 2 1990J 420 NJ
-preplace netloc eth1_rx_aligned 1 2 2 1910 400 NJ
-preplace netloc status_leds_qsfp0_leds 1 3 1 NJ 280
-preplace netloc status_leds_qsfp1_leds 1 3 1 NJ 300
-preplace netloc sys_clk_1 1 0 3 20 250 320 290 1890
-preplace netloc sys_resetn_in_1 1 0 3 40 410 340 270 1950
-preplace netloc axis_tx0_1 1 0 1 NJ 150
-preplace netloc axis_tx1_1 1 0 1 NJ 310
-preplace netloc cmac_usplus_0_gt_serial_port 1 2 2 NJ 160 NJ
-preplace netloc cmd_fifo_M_AXIS 1 3 1 NJ 60
-preplace netloc eth0_M_AXIS 1 2 1 N 60
-preplace netloc eth1_M_AXIS 1 2 1 1970 480n
-preplace netloc eth1_gt_serial_port 1 2 2 1870J 360 NJ
-preplace netloc gt_ref_clk_1 1 2 2 NJ 180 NJ
-preplace netloc qsfp1_clk_1 1 2 2 1930J 380 NJ
-preplace netloc rdmx_sequencer_0_axis_out 1 1 1 N 150
-preplace netloc rdmx_sequencer_1_axis_out 1 1 1 300 350n
-preplace netloc uw_fifo_M_AXIS 1 3 1 NJ 480
-preplace netloc eth1|cmac_control_0_reset_rx_datapath 1 1 1 N 780
-preplace netloc eth1|cmac_control_0_rx_resetn_out 1 1 2 890 440 1320J
-preplace netloc eth1|cmac_control_0_sys_reset_out 1 1 1 N 800
-preplace netloc eth1|cmac_control_sync_rx_aligned 1 1 3 850 400 1360J 580 1700J
-preplace netloc eth1|cmac_usplus_0_gt_txusrclk2 1 1 2 870 420 1340
-preplace netloc eth1|rx_cdc_bad_packet_count 1 3 1 N 680
-preplace netloc eth1|sys_clk_1 1 0 3 490 990 910 460 1300J
-preplace netloc eth1|sys_resetn_in_1 1 0 3 510 1040 NJ 1040 N
-preplace netloc eth1|S_AXIS_1 1 2 1 1380 420n
-preplace netloc eth1|axis_tx_1 1 0 1 N 900
-preplace netloc eth1|cmac_control_0_ctl_rx 1 1 1 N 560
-preplace netloc eth1|cmac_control_0_ctl_tx 1 1 1 N 540
-preplace netloc eth1|cmac_control_0_gt_trans_debug 1 1 1 N 580
-preplace netloc eth1|cmac_control_0_rs_fec 1 1 1 N 600
-preplace netloc eth1|cmac_usplus_0_gt_serial_port 1 2 2 N 520 NJ
-preplace netloc eth1|cmac_usplus_0_stat_rx 1 1 1 N 520
-preplace netloc eth1|gt_ref_clk_1 1 2 2 N 560 NJ
-preplace netloc eth1|rx_cdc_M_AXIS 1 3 1 N 640
-preplace netloc eth1|tx_fifo_M_AXIS 1 1 2 830 380 NJ
-levelinfo -pg 1 0 170 590 2130 2290
-levelinfo -hier eth1 * 670 1110 1540 *
-pagesize -pg 1 -db -bbox -sgen -150 0 2520 1110
-pagesize -hier eth1 -db -bbox -sgen 460 320 1730 1090
+preplace port qsfp0_gt -pg 1 -lvl 4 -x 1020 -y 210 -defaultsOSRD
+preplace port qsfp0_clk -pg 1 -lvl 4 -x 1020 -y 230 -defaultsOSRD -right
+preplace port axis_tx0_1 -pg 1 -lvl 0 -x 0 -y 80 -defaultsOSRD
+preplace port axis_rx0 -pg 1 -lvl 4 -x 1020 -y 110 -defaultsOSRD
+preplace port qsfp1_gt -pg 1 -lvl 4 -x 1020 -y 410 -defaultsOSRD
+preplace port qsfp1_clk -pg 1 -lvl 4 -x 1020 -y 430 -defaultsOSRD -right
+preplace port axis_rx1 -pg 1 -lvl 4 -x 1020 -y 530 -defaultsOSRD
+preplace port axis_tx1 -pg 1 -lvl 0 -x 0 -y 360 -defaultsOSRD
+preplace port axis_tx0_0 -pg 1 -lvl 0 -x 0 -y 60 -defaultsOSRD
+preplace port port-id_sys_clk -pg 1 -lvl 0 -x 0 -y 380 -defaultsOSRD
+preplace port port-id_sys_resetn_in -pg 1 -lvl 0 -x 0 -y 400 -defaultsOSRD
+preplace port port-id_rx1_aligned -pg 1 -lvl 4 -x 1020 -y 450 -defaultsOSRD
+preplace port port-id_rx0_aligned -pg 1 -lvl 4 -x 1020 -y 250 -defaultsOSRD
+preplace portBus qsfp0_leds -pg 1 -lvl 4 -x 1020 -y 330 -defaultsOSRD
+preplace portBus qsfp1_leds -pg 1 -lvl 4 -x 1020 -y 350 -defaultsOSRD
+preplace portBus qsfp0_bad_packets -pg 1 -lvl 4 -x 1020 -y 270 -defaultsOSRD
+preplace portBus qsfp1_bad_packets -pg 1 -lvl 4 -x 1020 -y 470 -defaultsOSRD
+preplace inst eth0 -pg 1 -lvl 2 -x 480 -y 90 -swap {5 1 2 3 4 13 6 7 8 9 10 11 12 0 14 15 16 17 18 19 20 21 22 23} -defaultsOSRD -pinDir gt_serial_port right -pinY gt_serial_port 120R -pinDir gt_ref_clk right -pinY gt_ref_clk 140R -pinDir S_AXIS left -pinY S_AXIS 150L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir sys_clk left -pinY sys_clk 170L -pinDir sys_resetn_in left -pinY sys_resetn_in 190L -pinDir rx_aligned right -pinY rx_aligned 160R -pinBusDir bad_packet_count right -pinBusY bad_packet_count 180R
+preplace inst eth1 -pg 1 -lvl 2 -x 480 -y 390 -defaultsOSRD -pinDir gt_serial_port right -pinY gt_serial_port 20R -pinDir gt_ref_clk right -pinY gt_ref_clk 40R -pinDir S_AXIS left -pinY S_AXIS 20L -pinDir M_AXIS right -pinY M_AXIS 140R -pinDir sys_clk left -pinY sys_clk 40L -pinDir sys_resetn_in left -pinY sys_resetn_in 60L -pinDir rx_aligned right -pinY rx_aligned 160R -pinBusDir bad_packet_count right -pinBusY bad_packet_count 180R
+preplace inst uw_fifo -pg 1 -lvl 3 -x 860 -y 510 -defaultsOSRD -pinDir S_AXIS left -pinY S_AXIS 20L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir s_axis_aresetn left -pinY s_axis_aresetn 40L -pinDir s_axis_aclk left -pinY s_axis_aclk 60L
+preplace inst rdmx_sequencer_0 -pg 1 -lvl 1 -x 170 -y 200 -defaultsOSRD -pinDir axis_in right -pinY axis_in 20R -pinDir axis_out right -pinY axis_out 40R -pinDir clk left -pinY clk 20L -pinDir resetn left -pinY resetn 40L
+preplace inst rdmx_sequencer_1 -pg 1 -lvl 1 -x 170 -y 340 -defaultsOSRD -pinDir axis_in left -pinY axis_in 20L -pinDir axis_out right -pinY axis_out 70R -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L
+preplace inst cmd_fifo -pg 1 -lvl 3 -x 860 -y 90 -defaultsOSRD -pinDir S_AXIS left -pinY S_AXIS 20L -pinDir M_AXIS right -pinY M_AXIS 20R -pinDir s_axis_aresetn left -pinY s_axis_aresetn 40L -pinDir s_axis_aclk left -pinY s_axis_aclk 60L
+preplace inst status_leds -pg 1 -lvl 3 -x 860 -y 310 -defaultsOSRD -pinDir link0_up left -pinY link0_up 20L -pinDir link1_up left -pinY link1_up 40L -pinBusDir qsfp0_leds right -pinBusY qsfp0_leds 20R -pinBusDir qsfp1_leds right -pinBusY qsfp1_leds 40R
+preplace inst axis_mux_0 -pg 1 -lvl 1 -x 170 -y 40 -defaultsOSRD -pinDir axis_in0 left -pinY axis_in0 20L -pinDir axis_in1 left -pinY axis_in1 40L -pinDir axis_out right -pinY axis_out 80R -pinDir clk left -pinY clk 60L -pinDir resetn left -pinY resetn 80L
+preplace netloc eth0_bad_packet_count 1 2 2 NJ 270 NJ
+preplace netloc eth0_rx_aligned 1 2 2 720 250 NJ
+preplace netloc eth1_bad_packet_count 1 2 2 640J 470 NJ
+preplace netloc eth1_rx_aligned 1 2 2 680 450 NJ
+preplace netloc status_leds_qsfp0_leds 1 3 1 NJ 330
+preplace netloc status_leds_qsfp1_leds 1 3 1 NJ 350
+preplace netloc sys_clk_1 1 0 3 20 300 300 350 660
+preplace netloc sys_resetn_in_1 1 0 3 40 470 320 330 700
+preplace netloc axis_tx1_1 1 0 1 NJ 360
+preplace netloc cmac_usplus_0_gt_serial_port 1 2 2 NJ 210 NJ
+preplace netloc cmd_fifo_M_AXIS 1 3 1 NJ 110
+preplace netloc eth0_M_AXIS 1 2 1 N 110
+preplace netloc eth1_M_AXIS 1 2 1 N 530
+preplace netloc eth1_gt_serial_port 1 2 2 NJ 410 NJ
+preplace netloc gt_ref_clk_1 1 2 2 NJ 230 NJ
+preplace netloc qsfp1_clk_1 1 2 2 NJ 430 NJ
+preplace netloc rdmx_sequencer_0_axis_out 1 1 1 N 240
+preplace netloc rdmx_sequencer_1_axis_out 1 1 1 N 410
+preplace netloc uw_fifo_M_AXIS 1 3 1 NJ 530
+preplace netloc axis_mux_0_axis_out 1 1 1 300 120n
+preplace netloc axis_tx0_1_1 1 0 1 N 80
+preplace netloc tx0_0_1 1 0 1 N 60
+levelinfo -pg 1 0 170 480 860 1020
+pagesize -pg 1 -db -bbox -sgen -150 0 1250 630
 ",
-   "No Loops_ScaleFactor":"1.0",
-   "No Loops_TopLeft":"1059,346",
+   "No Loops_ScaleFactor":"0.951324",
+   "No Loops_TopLeft":"-146,-18",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
 #  -string -flagsOSRD
 levelinfo -pg 1 0 10

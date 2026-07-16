@@ -1,0 +1,10 @@
+source api
+echo "ECDCOM_READY          = " $(ecd -dec ECDCOM_READY)
+echo "ECDCOM_LVDS_UNDERFLOW = " $(ecd -dec ECDCOM_LVDS_UNDERFLOW)
+echo "ECDCOM_SELFTEST_ERR   = " $(ecd -dec ECDCOM_SELFTEST_ERR)
+echo "Rcvd on QSFP_0        = " $(ecd_get64 ECDCOM_FD0_RCVD_H)
+echo "Rcvd on QSFP_1        = " $(ecd_get64 ECDCOM_FD1_RCVD_H)
+echo
+echo "ECDCOM_LINK_STATE     = " $(ecd -dec ECDCOM_LINK_STATE)
+echo "ECDCOM_UW_OVERFLOW    = " $(ecd -dec ECDCOM_UW_OVERFLOW)
+

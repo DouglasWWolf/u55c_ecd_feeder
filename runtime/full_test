@@ -1,0 +1,23 @@
+source api
+
+# Reset the ecd-feeder and wait for the reset to complete
+axi REG_RESET 1
+while [ $(get REG_RESET) -eq 1 ]; do
+    sleep .1  
+done
+
+# For tis test, ecd-feeder will use simulated data
+axi REG_USE_SIM_DATA 1
+
+# A frame is 0x40_0000 bytes (i.e., 4MB)
+axi REG_HOST_FRAME_SIZE 0x400000
+
+# Tell ecd-feeder to fill its buffers from host-RAM
+axi REG_START 1
+
+# Wait for ecd-feeder to tell us it's ready
+while [ $(get REG_READY) -ne 1]; do
+    sleep .1
+done
+
+

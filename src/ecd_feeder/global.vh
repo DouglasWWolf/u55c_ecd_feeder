@@ -5,6 +5,9 @@
 localparam  PT_FRAME_DATA = 0;
 localparam  PT_COMMAND    = 1;
 localparam  PT_UW_DATA    = 2;
+localparam  PT_AXI_REQ    = 3;
+localparam  PT_AXI_RSP    = 4;
+
 
 // "host_ram_reader" has a FIFO.  This is how deep it is
 localparam  HRR_FIFO_DEPTH = 4096;
