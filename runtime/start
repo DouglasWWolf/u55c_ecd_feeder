@@ -1,3 +1,7 @@
+#
+#  Resets ecd-feeder and tells it to refill its buffers
+#  from host-RAM
+#
 source api
 
 axi REG_RESET 1

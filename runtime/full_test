@@ -1,71 +1,146 @@
 source api
 
-# In Doug's lab, after either ecd-feeder or ecdcom issues a reset, it 
-# takes several seconds for the Ethernet switch to reacquire the link
-# to the FPGA Ethernet MAC
-ethernet_switch_sleep=5
+log()
+{
+    printf "%10s: %s %s %s %s %s\n"  $1 $2 $3 $4 $5 $6
+}
+
+# Make sure we have the RTL loaded!
+if [ $(pcireg -dec 20) -ne 7426 ]; then
+    echo "The ecd-feeder RTL isn't loaded into the FPGA!"
+    exit 1
+fi
+
+# Make sure we have an Ethernet link to the ECD
+link_bits=$(pcireg -dec REG_LINK_STATUS)
+if [ $link_bits -ne 3 ]; then
+    test $((link_bits & 1)) -eq 0 && echo "QSFP_0 not connected"
+    test $((link_bits & 2)) -eq 0 && echo "QSFP_1 not connected"
+    exit
+fi
+
+
+# By default, we're going to ask for 10,000 frames to be requested
+# This be overriden by a value on the command line
+frame_count=10000
+abort_limit=0
+while [ ! -z $1 ]; do
+    
+    # Is the user telling us how many packets to quit after?
+    if [ "$1" == "-abort" ]; then
+        shift
+        abort_limit=$1
+        shift
+        continue
+    fi
+
+    frame_count=$1
+    shift
+done
 
 
 # Reset the ecd-feeder and wait for the reset to complete
+log "ecd-feeder" resetting
+while [ $(get REG_RESET) -eq 1 ]; do
+    echo "Waiting for prior reset to complete..."
+    sleep .1  
+done
 axi REG_RESET 1
 while [ $(get REG_RESET) -eq 1 ]; do
     sleep .1  
 done
+log "ecd-feeder" reset complete
 
-# Wait for the ethernet switch
-if [ $ethernet_switch_sleep -ne 0 ]; then
-    echo "Waiting for Ethernet switch..."
-    sleep $ethernet_switch_sleep
-fi
-
-echo a
-
-# In Doug's ECD simulator, for technical reset, we have to manually
-# clear this flag
-ecd ECDCOM_SELFTEST_ERR 0
-
-echo b
-
-# Reset the ECD
+# Reset the ECD and wait for it to complete
+log ecdcom resetting
 ecd ECDCOM_RESET 1
-echo c
+while [ $(ecd -dec ECDCOM_RESET) -eq 1 ]; do
+    sleep .1
+done
+log ecdcom reset complete
 
+# Wait for any in-flight packets to get tossed into the bit-bucket
+sleep 1
 
-# Wait for the ethernet switch
-if [ $ethernet_switch_sleep -ne 0 ]; then
-    echo "Waiting for Ethernet switch..."
-    sleep $ethernet_switch_sleep
-fi
-
-# For tis test, ecd-feeder will use simulated data
+# For this test, ecd-feeder will use simulated data
 axi REG_USE_SIM_DATA 1
 
 # A frame is 0x40_0000 bytes (i.e., 4MB)
 axi REG_HOST_FRAME_SIZE 0x400000
 
-# Tell ecd-feeder to fill its buffers from host-RAM
-sleep 2
-axi REG_START 1
+# Host RAM frame-data buffer begins at 0x1_0000_0000
+axi REG_FD_HOST_ADDR 0x100000000
 
-# Wait for ecd-feeder to tell us it's ready
+# Our simulated host RAM buffer is 16GB.  In real life, it must
+# be at least 32GB!
+axi REG_FD_HOST_SIZE 0x400000000
+
+# For the self-tester to work, the ecdcom example design needs
+# to know how big our simulated host RAM buffer is
+ecd ECDCOM_FD_HOST_SIZE_H 4
+ecd ECDCOM_FD_HOST_SIZE_L 0
+
+# Tell ecd-feeder to fill its buffers from host-RAM
+# and wait until that's done
+log ecd-feeder filling buffers
+axi REG_START 1
 while [ $(get REG_READY) -ne 1 ]; do
     sleep .1
 done
+log ecd-feeder buffers filled
 
 # Tell ECD to fill its internal buffers
+log ecdcom filling buffers
 ecd ECDCOM_START 1
-test $? -ne 0 && exit 1
-
-# Wait for ecd-feeder to tell us it's ready
-echo "ECD is filling its buffers"
 while [ $(ecd -dec ECDCOM_READY) -ne 1 ]; do
     sleep .1
 done
-echo "Filled!"
+log ecdcom buffers filled
 
 # Tell the ECD to demand a large number of frames of data
-ecd ECDCOM_GET_FRAMES 1000000
+log ecdcom demanding frames
+ecd ECDCOM_GET_FRAMES $frame_count
+
+packets=-1
+printf "\n\n\n\n\n\n\n"
+while :; do
+    sleep .5
+    
+    packets_reqd0=$(pcireg -dec REG_CH0_PACKETS_REQ)
+    packets_reqd1=$(pcireg -dec REG_CH1_PACKETS_REQ)
+    packets_sent0=$(pcireg -dec REG_CH0_PACKETS_SENT)
+    packets_sent1=$(pcireg -dec REG_CH1_PACKETS_SENT)
+    packets_rcvd0=$(ecd_get64 ECDCOM_FD0_RCVD_H)
+    packets_rcvd1=$(ecd_get64 ECDCOM_FD1_RCVD_H)
+
+    printf "\e[1A"
+    printf "\e[1A"
+    printf "\e[1A"
+    printf "\e[1A"
+    printf "\e[1A"
+    printf "\e[1A"
+
+    printf "ecd-feeder: packets reqd QSFP_0: %8u\n" $packets_reqd0
+    printf "ecd-feeder: packets reqd QSFP_1: %8u\n" $packets_reqd1 
+    printf "ecd-feeder: packets sent QSFP_0: %8u\n" $packets_sent0
+    printf "ecd-feeder: packets sent QSFP_1: %8u\n" $packets_sent1
+    printf "    ecdcom: packets rcvd QSFP_0: %8u\n" $packets_rcvd0
+    printf "    ecdcom: packets rcvd QSFP_1: %8u\n" $packets_rcvd1
+
+    test $packets_rcvd0 -eq $packets && break;
+    packets=$packets_rcvd0
+
+    # If we're suppose to abort after a certain number of packets
+    # have been received by ECD, make it so
+    if [ $abort_limit -ne 0 ] && [ $packets -ge $abort_limit ]; then
+         exit 1
+    fi
+done
+echo
 
 
+echo "ECDCOM_START          = " $(ecd -dec ECDCOM_START)
+echo "ECDCOM_READY          = " $(ecd -dec ECDCOM_READY)
+echo "ECDCOM_LVDS_UNDERFLOW = " $(ecd -dec ECDCOM_LVDS_UNDERFLOW)
+echo "ECDCOM_SELFTEST_ERR   = " $(ecd -dec ECDCOM_SELFTEST_ERR)
 
-./ecd_status

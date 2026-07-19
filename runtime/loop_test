@@ -1,0 +1,17 @@
+source api
+
+while :; do
+
+    ./full_test 1000000 -abort 4000000
+
+    echo
+    echo "ECDCOM_LVDS_UNDERFLOW   = " $(ecd -dec ECDCOM_LVDS_UNDERFLOW)
+    echo "ECDCOM_SELFTEST_ERR     = " $(ecd -dec ECDCOM_SELFTEST_ERR)
+    echo "REG_SELFTEST_ERR        = " $(pcireg -dec REG_SELFTEST_ERR)
+    echo
+
+    test $(ecd -dec ECDCOM_LVDS_UNDERFLOW) -ne 0 && break;
+    test $(ecd -dec ECDCOM_SELFTEST_ERR  ) -ne 0 && break;
+    test $(pcireg -dec REG_SELFTEST_ERR  ) -ne 0 && break;
+
+done

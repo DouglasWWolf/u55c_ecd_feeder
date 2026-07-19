@@ -1,4 +1,5 @@
 source api
+echo "ECDCOM_START          = " $(ecd -dec ECDCOM_START)
 echo "ECDCOM_READY          = " $(ecd -dec ECDCOM_READY)
 echo "ECDCOM_LVDS_UNDERFLOW = " $(ecd -dec ECDCOM_LVDS_UNDERFLOW)
 echo "ECDCOM_SELFTEST_ERR   = " $(ecd -dec ECDCOM_SELFTEST_ERR)

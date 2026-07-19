@@ -2,7 +2,7 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "top_level_axis_mux_0_0",
-    "cell_name": "axis_mux_0",
+    "cell_name": "ethernet/axis_mux_0",
     "component_reference": "xilinx.com:module_ref:axis_mux:1.0",
     "ip_revision": "1",
     "gen_directory": "../../../../../../project.gen/sources_1/bd/top_level/ip/top_level_axis_mux_0_0",

@@ -211,6 +211,42 @@
 
 
 //
+// Register:    REG_CH0_PACKETS_REQ
+// Size:        64-bits
+// Type:        Read only
+// Description: The number of packets requested on channel 0
+//
+#define REG_CH0_PACKETS_REQ                                          0x4000000000001054ULL
+
+
+//
+// Register:    REG_CH1_PACKETS_REQ
+// Size:        64-bits
+// Type:        Read only
+// Description: The number of packets requested on channel 1
+//
+#define REG_CH1_PACKETS_REQ                                          0x400000000000105cULL
+
+
+//
+// Register:    REG_CH0_PACKETS_SENT
+// Size:        64-bits
+// Type:        Read only
+// Description: The number of packets sent on channel 0
+//
+#define REG_CH0_PACKETS_SENT                                         0x4000000000001064ULL
+
+
+//
+// Register:    REG_CH1_PACKETS_SENT
+// Size:        64-bits
+// Type:        Read only
+// Description: The number of packets sent on channel 1
+//
+#define REG_CH1_PACKETS_SENT                                         0x400000000000106cULL
+
+
+//
 // Register:    REG_UW_HOST_ADDR
 // Size:        64-bits
 // Type:        Read/Write
