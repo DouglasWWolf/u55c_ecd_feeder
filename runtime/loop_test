@@ -2,7 +2,7 @@ source api
 
 while :; do
 
-    ./full_test 1000000 -abort 4000000
+    ./full_test 10000000 -abort 60000000
 
     echo
     echo "ECDCOM_LVDS_UNDERFLOW   = " $(ecd -dec ECDCOM_LVDS_UNDERFLOW)

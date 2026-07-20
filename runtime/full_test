@@ -71,13 +71,12 @@ axi REG_HOST_FRAME_SIZE 0x400000
 # Host RAM frame-data buffer begins at 0x1_0000_0000
 axi REG_FD_HOST_ADDR 0x100000000
 
-# Our simulated host RAM buffer is 16GB.  In real life, it must
-# be at least 32GB!
-axi REG_FD_HOST_SIZE 0x400000000
+# Our host RAM buffer is 32GB.
+axi REG_FD_HOST_SIZE 0x800000000
 
 # For the self-tester to work, the ecdcom example design needs
 # to know how big our simulated host RAM buffer is
-ecd ECDCOM_FD_HOST_SIZE_H 4
+ecd ECDCOM_FD_HOST_SIZE_H 8
 ecd ECDCOM_FD_HOST_SIZE_L 0
 
 # Tell ecd-feeder to fill its buffers from host-RAM
