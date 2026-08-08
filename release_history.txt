@@ -4,3 +4,6 @@ Version  Date       Who  What
   
   1.1.0  15-Jul-26  DWW  Added remote register read/writes over QSFP
 
+  1.2.0  08-Aug-26  DWW  Updated axi4_lite_slave.v for AXI-write bugfix
+
+
