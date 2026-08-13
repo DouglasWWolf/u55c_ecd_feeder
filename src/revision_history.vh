@@ -6,9 +6,11 @@
 //   1.1.0  15-Jul-2026  DWW  Added remote register read/writes over QSFP
 //
 //   1.2.0  08-Aug-2026  DWW  Updated axi4_lite_slave.v for AXI-write bugfix
+//
+//   1.3.0  17-Aug-2026  DWW  Minor refactor of "rdmx_decoder.v" to make code clearer
 //================================================================================================
 localparam VERSION_MAJOR = 1;
-localparam VERSION_MINOR = 2;
+localparam VERSION_MINOR = 3;
 localparam VERSION_BUILD = 0;
 localparam VERSION_RCAND = 0; 
 localparam RTL_TYPE      = 7426;
