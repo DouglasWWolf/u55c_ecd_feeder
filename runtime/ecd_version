@@ -1,0 +1,102 @@
+#
+#  This displays the identity of the remote ECDCOM design
+#  
+source api
+
+rtl_id=$(ecd -dec 20)
+
+#====================================================
+# Displays the RTL application name
+#====================================================
+get_name()
+{
+    local type=$1
+
+    case $type in
+          81926) echo "indy_ecdcom";;
+              *) echo "rtl_app_$type";;
+    esac
+}
+#====================================================
+
+
+#====================================================
+# Displays the version of the RTL bitstream
+#====================================================
+get_version()
+{
+    local major=$(ecd -dec 0)
+    local minor=$(ecd -dec 4)
+    local revis=$(ecd -dec 8)
+    echo ${major}.${minor}.${revis}
+}
+#====================================================
+
+#====================================================
+# Fetches and displays the date
+#====================================================
+get_date()
+{
+    # Fetch the date
+    tsd=$(ecd -dec 0x10);
+
+    # Extract the date components
+    month=$(( (tsd >>24) & 0x00FF))
+      day=$(( (tsd >>16) & 0x00FF))
+     year=$(( (tsd >> 0) & 0xFFFF))
+
+    # Display the formatted date
+    printf "%02d/%02d/%04d" $month $day $year
+}
+#====================================================
+
+
+#====================================================
+# Fetches and displays the time
+#====================================================
+get_time()
+{
+    # Fetch the time
+    tst=$(ecd -dec 0x1C);
+
+    # Extract the time components
+    hour=$(( (tst >> 16) & 0xFF))
+     min=$(( (tst >>  8) & 0xFF))
+     sec=$(( (tst >>  0) & 0xFF))
+
+    # Display the formatted time and date
+    printf "%02d:%02d:%02d\n" $hour $min $sec
+}
+#====================================================
+
+#====================================================
+# Fetches and displays the git-hash
+#====================================================
+get_hash()
+{
+    v0=$(ecd -dec 0x40)
+    v1=$(ecd -dec 0x44)
+    v2=$(ecd -dec 0x48)
+    v3=$(ecd -dec 0x4C)
+    v4=$(ecd -dec 0x50)
+
+    h0=$(printf "%08X" $v0)
+    h1=$(printf "%08X" $v1)
+    h2=$(printf "%08X" $v2)
+    h3=$(printf "%08X" $v3)
+    h4=$(printf "%08X" $v4)
+
+    echo $h0$h1$h2$h3$h4 | tr '[:upper:]' '[:lower:]'
+}
+#====================================================
+
+
+
+
+name=$(get_name $rtl_id)
+version=$(get_version)
+build_date=$(get_date)
+build_time=$(get_time)
+hash=$(get_hash)
+
+echo $name $version $build_date $build_time $hash
