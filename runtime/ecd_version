@@ -2,6 +2,7 @@
 #  This displays the identity of the remote ECDCOM design
 #  
 source api
+export pcireg_device=10ee:903F
 
 rtl_id=$(ecd -dec 20)
 
