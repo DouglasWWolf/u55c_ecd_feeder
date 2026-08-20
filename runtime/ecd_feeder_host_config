@@ -1,0 +1,10 @@
+#
+#  This file should reside in the /home/$USER directory
+#
+
+# Where in host-RAM is the frame data buffer?
+host_ram_fd_addr=0x100000000
+
+# How big is the host-RAM frame data buffer?
+host_ram_fd_size=0x800000000
+

@@ -1,4 +1,14 @@
+# Fetch the API that reads/writes registers
 source api
+
+# Fetch the host RAM configuration 
+fn=~/ecd_feeder_host_config
+if [ -f $fn ]; then
+    source ~/ecd_feeder_host_config
+else 
+    echo "$fn not found!"
+    exit 1
+fi
 
 log()
 {
@@ -68,16 +78,16 @@ axi REG_USE_SIM_DATA 1
 # A frame is 0x40_0000 bytes (i.e., 4MB)
 axi REG_HOST_FRAME_SIZE 0x400000
 
-# Host RAM frame-data buffer begins at 0x1_0000_0000
-axi REG_FD_HOST_ADDR 0x100000000
+# Tell the system where the Host RAM frame-data buffer is
+axi REG_FD_HOST_ADDR $host_ram_fd_addr
 
-# Our host RAM buffer is 32GB.
-axi REG_FD_HOST_SIZE 0x800000000
+# Tell the system how large the host RAM frame-data buffer is
+axi REG_FD_HOST_SIZE $host_ram_fd_size
 
 # For the self-tester to work, the ecdcom example design needs
 # to know how big our simulated host RAM buffer is
-ecd ECDCOM_FD_HOST_SIZE_H 8
-ecd ECDCOM_FD_HOST_SIZE_L 0
+ecd ECDCOM_FD_HOST_SIZE_H $(( $host_ram_fd_size >> 32 ))
+ecd ECDCOM_FD_HOST_SIZE_L $(( $host_ram_fd_size & 0xFFFFFFFF ))
 
 # Tell ecd-feeder to fill its buffers from host-RAM
 # and wait until that's done
