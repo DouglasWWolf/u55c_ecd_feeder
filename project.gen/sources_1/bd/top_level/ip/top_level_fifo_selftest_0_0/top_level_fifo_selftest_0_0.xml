@@ -454,7 +454,7 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>fd_host_size</spirit:name>
+        <spirit:name>selftest_size</spirit:name>
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:vector>

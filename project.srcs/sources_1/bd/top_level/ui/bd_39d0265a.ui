@@ -6,7 +6,7 @@
    "Display-PortTypeReset":"true",
    "DisplayTieOff":"1",
    "ExpandedHierarchyInLayout":"",
-   "No Loops_ExpandedHierarchyInLayout":"",
+   "No Loops_ExpandedHierarchyInLayout":"/feeder|/feeder/channel_0|/feeder/channel_1",
    "No Loops_Layers":"/pcie/clock_buffer_1_IBUF_OUT:true|/ethernet/eth0/cmac_usplus_0_gt_txusrclk2:true|/ethernet/eth1/cmac_usplus_0_gt_txusrclk2:true|/pcie/clock_buffer_IBUF_OUT:true|/pcie/pcie_bridge_1_axi_aclk:true|/feeder/channel_1/hbm_fifo/hbm/clock_buffer_IBUF_OUT:true|/feeder/channel_0/hbm_fifo/hbm/clock_buffer_IBUF_OUT:true|/pcie/pcie_bridge_0_axi_aclk:true|/pcie/clock_buffer_1_IBUF_DS_ODIV2:true|/pcie/clock_buffer_IBUF_DS_ODIV2:true|/feeder/control/proc_sys_reset_0_peripheral_aresetn:true|/pcie/pcie_bridge_1_axi_aresetn:true|/ethernet/eth1/cmac_control_0_reset_rx_datapath:true|/pcie/pcie_bridge_0_axi_aresetn:true|/sys_rst_n_0_1:true|/feeder/control/control_resetn_out:true|/ethernet/eth0/cmac_control_0_rx_resetn_out:true|/ethernet/eth1/cmac_control_0_rx_resetn_out:true|/ethernet/eth0/cmac_control_0_reset_rx_datapath:true|",
    "No Loops_Layout":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
 #  -string -flagsOSRD
@@ -14,69 +14,196 @@ preplace port pcie0_refclk -pg 1 -lvl 0 -x 0 -y 390 -defaultsOSRD
 preplace port pcie_mgt_0 -pg 1 -lvl 0 -x 0 -y 410 -defaultsOSRD -left
 preplace port pcie_mgt_1 -pg 1 -lvl 0 -x 0 -y 350 -defaultsOSRD -left
 preplace port pcie1_refclk -pg 1 -lvl 0 -x 0 -y 370 -defaultsOSRD
-preplace port qsfp0_gt -pg 1 -lvl 5 -x 1580 -y 80 -defaultsOSRD
-preplace port qsfp0_clk -pg 1 -lvl 5 -x 1580 -y 120 -defaultsOSRD -right
-preplace port qsfp1_clk -pg 1 -lvl 5 -x 1580 -y 100 -defaultsOSRD -right
-preplace port qsfp1_gt -pg 1 -lvl 5 -x 1580 -y 60 -defaultsOSRD
+preplace port qsfp0_gt -pg 1 -lvl 5 -x 7420 -y 80 -defaultsOSRD
+preplace port qsfp0_clk -pg 1 -lvl 5 -x 7420 -y 120 -defaultsOSRD -right
+preplace port qsfp1_clk -pg 1 -lvl 5 -x 7420 -y 100 -defaultsOSRD -right
+preplace port qsfp1_gt -pg 1 -lvl 5 -x 7420 -y 60 -defaultsOSRD
 preplace port hbm0_refclk -pg 1 -lvl 0 -x 0 -y 250 -defaultsOSRD
 preplace port hbm1_refclk -pg 1 -lvl 0 -x 0 -y 290 -defaultsOSRD
 preplace port port-id_pcie_perst_l -pg 1 -lvl 0 -x 0 -y 430 -defaultsOSRD
 preplace portBus hbm_cattrip -pg 1 -lvl 0 -x 0 -y 270 -defaultsOSRD -left
-preplace portBus qsfp0_leds -pg 1 -lvl 5 -x 1580 -y 410 -defaultsOSRD
-preplace portBus qsfp1_leds -pg 1 -lvl 5 -x 1580 -y 430 -defaultsOSRD
+preplace portBus qsfp0_leds -pg 1 -lvl 5 -x 7420 -y 410 -defaultsOSRD
+preplace portBus qsfp1_leds -pg 1 -lvl 5 -x 7420 -y 430 -defaultsOSRD
 preplace inst pcie -pg 1 -lvl 1 -x 170 -y 330 -swap {3 1 2 13 4 5 6 7 0 9 10 11 12 8 14 15 130 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 92 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 150 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 54 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 170 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 16 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192} -defaultsOSRD -pinDir pcie1_refclk left -pinY pcie1_refclk 40L -pinDir pcie_mgt_0 left -pinY pcie_mgt_0 80L -pinDir pcie_mgt_1 left -pinY pcie_mgt_1 20L -pinDir pcie0_refclk left -pinY pcie0_refclk 60L -pinDir S_AXI_FDATA1 right -pinY S_AXI_FDATA1 80R -pinDir S_AXI_FDATA0 right -pinY S_AXI_FDATA0 60R -pinDir S_AXI_UWDATA right -pinY S_AXI_UWDATA 190R -pinDir M00_AXI right -pinY M00_AXI 40R -pinDir M01_AXI right -pinY M01_AXI 250R -pinDir M03_AXI right -pinY M03_AXI 20R -pinDir pcie_perst_l left -pinY pcie_perst_l 100L -pinDir axi_aresetn right -pinY axi_aresetn 270R -pinDir axi_aclk right -pinY axi_aclk 290R
-preplace inst feeder -pg 1 -lvl 2 -x 550 -y 230 -swap {68 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 106 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 63 59 60 61 62 58 64 65 66 67 109 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 0 107 108 20 110 111 116 113 115 114 112 117 118} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 140L -pinDir M_AXI_RAM0 left -pinY M_AXI_RAM0 160L -pinDir axis_out0 right -pinY axis_out0 80R -pinDir axis_out1 right -pinY axis_out1 60R -pinDir M_AXI_RAM1 left -pinY M_AXI_RAM1 180L -pinDir hbm0_refclk left -pinY hbm0_refclk 20L -pinDir hbm1_refclk left -pinY hbm1_refclk 60L -pinDir clk left -pinY clk 240L -pinDir resetn left -pinY resetn 220L -pinBusDir remote_send_cnt right -pinBusY remote_send_cnt 120R -pinDir remote_send_stb right -pinY remote_send_stb 100R -pinDir cattrip left -pinY cattrip 200L -pinDir enable right -pinY enable 140R -pinDir uw_writer_halted right -pinY uw_writer_halted 240R
-preplace inst ethernet -pg 1 -lvl 4 -x 1390 -y 40 -swap {5 1 2 3 4 22 6 7 34 9 10 11 12 13 14 15 16 0 18 19 20 21 17 23 24 25 26 27 28 29 30 31 32 33 8 35 36 37 38 40 39 41 42 46 43 44 45} -defaultsOSRD -pinDir qsfp0_gt right -pinY qsfp0_gt 40R -pinDir qsfp0_clk right -pinY qsfp0_clk 80R -pinDir axis_tx0_1 left -pinY axis_tx0_1 270L -pinDir axis_rx0 left -pinY axis_rx0 80L -pinDir qsfp1_gt right -pinY qsfp1_gt 20R -pinDir qsfp1_clk right -pinY qsfp1_clk 60R -pinDir axis_rx1 right -pinY axis_rx1 350R -pinDir axis_tx1 left -pinY axis_tx1 250L -pinDir axis_tx0_0 left -pinY axis_tx0_0 20L -pinDir sys_clk left -pinY sys_clk 310L -pinDir sys_resetn left -pinY sys_resetn 290L -pinBusDir qsfp0_leds right -pinBusY qsfp0_leds 370R -pinBusDir qsfp1_leds right -pinBusY qsfp1_leds 390R -pinDir rx1_aligned left -pinY rx1_aligned 390L -pinDir rx0_aligned left -pinY rx0_aligned 330L -pinBusDir qsfp0_bad_packets left -pinBusY qsfp0_bad_packets 350L -pinBusDir qsfp1_bad_packets left -pinBusY qsfp1_bad_packets 370L
-preplace inst qsfp0_rx -pg 1 -lvl 3 -x 1020 -y 100 -swap {0 1 2 3 4 5 6 7 12 8 9 10 11} -defaultsOSRD -pinDir axis_in right -pinY axis_in 20R -pinDir axis_axi left -pinY axis_axi 20L -pinDir clk left -pinY clk 120L -pinDir resetn left -pinY resetn 40L -pinDir packet_req_stb left -pinY packet_req_stb 60L -pinBusDir packet_req_cnt left -pinBusY packet_req_cnt 80L -pinDir enable left -pinY enable 100L
-preplace inst axi_registers -pg 1 -lvl 2 -x 550 -y 560 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 21 20 30 27 29 28 23 24 22 25 26} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 20L -pinDir clk left -pinY clk 60L -pinDir resetn left -pinY resetn 40L -pinBusDir uw_host_addr right -pinBusY uw_host_addr 180R -pinBusDir uw_host_size right -pinBusY uw_host_size 120R -pinBusDir uw_dropped right -pinBusY uw_dropped 160R -pinBusDir uw_written right -pinBusY uw_written 140R -pinBusDir qsfp0_malformed right -pinBusY qsfp0_malformed 40R -pinBusDir qsfp1_malformed right -pinBusY qsfp1_malformed 60R -pinDir async_rx0_aligned right -pinY async_rx0_aligned 20R -pinDir async_rx1_aligned right -pinY async_rx1_aligned 80R -pinDir swapped_cables right -pinY swapped_cables 100R
-preplace inst qsfp1_rx -pg 1 -lvl 4 -x 1390 -y 500 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 44 42 43 47 50 48 49 46 45} -defaultsOSRD -pinDir M_AXI left -pinY M_AXI 20L -pinDir axis_in right -pinY axis_in 20R -pinDir clk left -pinY clk 80L -pinDir resetn left -pinY resetn 40L -pinDir enable left -pinY enable 60L -pinBusDir uw_host_size left -pinBusY uw_host_size 180L -pinBusDir uw_host_addr left -pinBusY uw_host_addr 240L -pinBusDir uw_written left -pinBusY uw_written 200L -pinBusDir uw_dropped left -pinBusY uw_dropped 220L -pinDir swapped left -pinY swapped 160L -pinDir host_writer_halted left -pinY host_writer_halted 100L
-preplace inst ecd_axi -pg 1 -lvl 2 -x 550 -y 40 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 30 29} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 60L -pinDir axis_out right -pinY axis_out 20R -pinDir axis_in right -pinY axis_in 80R -pinDir clk left -pinY clk 100L -pinDir resetn left -pinY resetn 80L
-preplace netloc axi_registers_0_uw_host_addr 1 2 2 N 740 N
-preplace netloc axi_registers_0_uw_host_size 1 2 2 N 680 N
-preplace netloc cmd_handler_packet_req_cnt 1 2 1 760 180n
-preplace netloc cmd_handler_packet_req_stb 1 2 1 720 160n
-preplace netloc ethernet_qsfp0_bad_packets 1 2 2 820J 390 NJ
+preplace inst feeder -pg 1 -lvl 2 -x 750 -y 230 -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 800L -pinDir M_AXI_RAM0 left -pinY M_AXI_RAM0 820L -pinDir axis_out0 right -pinY axis_out0 760R -pinDir axis_out1 right -pinY axis_out1 960R -pinDir M_AXI_RAM1 left -pinY M_AXI_RAM1 840L -pinDir hbm0_refclk left -pinY hbm0_refclk 860L -pinDir hbm1_refclk left -pinY hbm1_refclk 880L -pinDir clk left -pinY clk 900L -pinDir resetn left -pinY resetn 920L -pinBusDir remote_send_cnt right -pinBusY remote_send_cnt 980R -pinDir remote_send_stb right -pinY remote_send_stb 1000R -pinDir cattrip left -pinY cattrip 1040L -pinDir enable right -pinY enable 1020R -pinDir uw_writer_halted right -pinY uw_writer_halted 2000R
+preplace inst ethernet -pg 1 -lvl 4 -x 7230 -y 40 -swap {5 1 2 3 4 22 6 7 34 9 10 11 12 13 14 15 16 0 18 19 20 21 17 23 24 25 26 27 28 29 30 31 32 33 8 35 36 37 38 40 39 41 42 46 43 44 45} -defaultsOSRD -pinDir qsfp0_gt right -pinY qsfp0_gt 40R -pinDir qsfp0_clk right -pinY qsfp0_clk 80R -pinDir axis_tx0_1 left -pinY axis_tx0_1 270L -pinDir axis_rx0 left -pinY axis_rx0 80L -pinDir qsfp1_gt right -pinY qsfp1_gt 20R -pinDir qsfp1_clk right -pinY qsfp1_clk 60R -pinDir axis_rx1 right -pinY axis_rx1 350R -pinDir axis_tx1 left -pinY axis_tx1 250L -pinDir axis_tx0_0 left -pinY axis_tx0_0 20L -pinDir sys_clk left -pinY sys_clk 310L -pinDir sys_resetn left -pinY sys_resetn 290L -pinBusDir qsfp0_leds right -pinBusY qsfp0_leds 370R -pinBusDir qsfp1_leds right -pinBusY qsfp1_leds 390R -pinDir rx1_aligned left -pinY rx1_aligned 390L -pinDir rx0_aligned left -pinY rx0_aligned 330L -pinBusDir qsfp0_bad_packets left -pinBusY qsfp0_bad_packets 350L -pinBusDir qsfp1_bad_packets left -pinBusY qsfp1_bad_packets 370L
+preplace inst qsfp0_rx -pg 1 -lvl 3 -x 6860 -y 100 -swap {0 1 2 3 4 5 6 7 12 8 10 9 11} -defaultsOSRD -pinDir axis_in right -pinY axis_in 20R -pinDir axis_axi left -pinY axis_axi 20L -pinDir clk left -pinY clk 120L -pinDir resetn left -pinY resetn 40L -pinDir packet_req_stb left -pinY packet_req_stb 80L -pinBusDir packet_req_cnt left -pinBusY packet_req_cnt 60L -pinDir enable left -pinY enable 100L
+preplace inst axi_registers -pg 1 -lvl 2 -x 750 -y 2300 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 21 20 30 27 29 28 23 24 22 25 26} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 20L -pinDir clk left -pinY clk 60L -pinDir resetn left -pinY resetn 40L -pinBusDir uw_host_addr right -pinBusY uw_host_addr 180R -pinBusDir uw_host_size right -pinBusY uw_host_size 120R -pinBusDir uw_dropped right -pinBusY uw_dropped 160R -pinBusDir uw_written right -pinBusY uw_written 140R -pinBusDir qsfp0_malformed right -pinBusY qsfp0_malformed 40R -pinBusDir qsfp1_malformed right -pinBusY qsfp1_malformed 60R -pinDir async_rx0_aligned right -pinY async_rx0_aligned 20R -pinDir async_rx1_aligned right -pinY async_rx1_aligned 80R -pinDir swapped_cables right -pinY swapped_cables 100R
+preplace inst qsfp1_rx -pg 1 -lvl 4 -x 7230 -y 500 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 44 42 43 47 50 48 49 46 45} -defaultsOSRD -pinDir M_AXI left -pinY M_AXI 20L -pinDir axis_in right -pinY axis_in 20R -pinDir clk left -pinY clk 80L -pinDir resetn left -pinY resetn 40L -pinDir enable left -pinY enable 60L -pinBusDir uw_host_size left -pinBusY uw_host_size 180L -pinBusDir uw_host_addr left -pinBusY uw_host_addr 240L -pinBusDir uw_written left -pinBusY uw_written 200L -pinBusDir uw_dropped left -pinBusY uw_dropped 220L -pinDir swapped left -pinY swapped 160L -pinDir host_writer_halted left -pinY host_writer_halted 100L
+preplace inst ecd_axi -pg 1 -lvl 2 -x 750 -y 40 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 30 29} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 60L -pinDir axis_out right -pinY axis_out 20R -pinDir axis_in right -pinY axis_in 80R -pinDir clk left -pinY clk 100L -pinDir resetn left -pinY resetn 80L
+preplace inst feeder|channel_0 -pg 1 -lvl 2 -x 1920 -y 260 -defaultsOSRD -pinDir M_AXI left -pinY M_AXI 50L -pinDir axis_out right -pinY axis_out 730R -pinDir hbm_refclk left -pinY hbm_refclk 310L -pinDir clk left -pinY clk 330L -pinDir soft_resetn left -pinY soft_resetn 350L -pinBusDir host_frame_size left -pinBusY host_frame_size 370L -pinBusDir fd_host_addr left -pinBusY fd_host_addr 390L -pinBusDir fd_host_size left -pinBusY fd_host_size 410L -pinBusDir half_frames_consumed left -pinBusY half_frames_consumed 430L -pinDir enable left -pinY enable 450L -pinDir host_reader_halted left -pinY host_reader_halted 470L -pinDir local_send_stb left -pinY local_send_stb 490L -pinBusDir local_send_cnt left -pinBusY local_send_cnt 510L -pinDir remote_send_stb right -pinY remote_send_stb 750R -pinBusDir remote_send_cnt right -pinBusY remote_send_cnt 770R -pinDir use_sim_data left -pinY use_sim_data 530L -pinDir fifo_full left -pinY fifo_full 550L -pinBusDir hbm_temp left -pinBusY hbm_temp 570L -pinDir hbm_cattrip left -pinY hbm_cattrip 590L -pinBusDir error left -pinBusY error 740L -pinDir emitter_halted left -pinY emitter_halted 760L -pinBusDir packets_req left -pinBusY packets_req 780L -pinBusDir packets_sent left -pinBusY packets_sent 800L -pinDir host_read_error left -pinY host_read_error 820L -pinDir emitter_stall left -pinY emitter_stall 880L -pinDir hbm_writer_halted left -pinY hbm_writer_halted 900L -pinDir hbm_reader_halted left -pinY hbm_reader_halted 920L -pinDir resetn left -pinY resetn 940L -pinBusDir selftest_size left -pinBusY selftest_size 960L
+preplace inst feeder|channel_1 -pg 1 -lvl 3 -x 4520 -y 1290 -defaultsOSRD -pinDir M_AXI left -pinY M_AXI 50L -pinDir axis_out right -pinY axis_out 340R -pinDir hbm_refclk left -pinY hbm_refclk 310L -pinDir clk left -pinY clk 330L -pinDir soft_resetn left -pinY soft_resetn 350L -pinBusDir host_frame_size left -pinBusY host_frame_size 370L -pinBusDir fd_host_addr left -pinBusY fd_host_addr 390L -pinBusDir fd_host_size left -pinBusY fd_host_size 410L -pinBusDir half_frames_consumed left -pinBusY half_frames_consumed 430L -pinDir enable left -pinY enable 450L -pinDir host_reader_halted left -pinY host_reader_halted 470L -pinDir local_send_stb left -pinY local_send_stb 520L -pinBusDir local_send_cnt left -pinBusY local_send_cnt 540L -pinDir remote_send_stb left -pinY remote_send_stb 580L -pinBusDir remote_send_cnt left -pinBusY remote_send_cnt 600L -pinDir use_sim_data left -pinY use_sim_data 620L -pinDir fifo_full left -pinY fifo_full 640L -pinBusDir hbm_temp left -pinBusY hbm_temp 660L -pinDir hbm_cattrip left -pinY hbm_cattrip 680L -pinBusDir error left -pinBusY error 700L -pinDir emitter_halted left -pinY emitter_halted 720L -pinBusDir packets_req left -pinBusY packets_req 740L -pinBusDir packets_sent left -pinBusY packets_sent 760L -pinDir host_read_error left -pinY host_read_error 780L -pinDir emitter_stall left -pinY emitter_stall 800L -pinDir hbm_writer_halted left -pinY hbm_writer_halted 820L -pinDir hbm_reader_halted left -pinY hbm_reader_halted 840L -pinDir resetn left -pinY resetn 860L -pinBusDir selftest_size left -pinBusY selftest_size 880L
+preplace inst feeder|control -pg 1 -lvl 1 -x 870 -y 1190 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 39 40 32 34 38 22 41 25 42 26 43 33 29 44 30 45 24 46 27 47 31 48 35 49 23 50 28 51 36 52 37 53 58 54 55 56 57} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 20L -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L -pinDir enable right -pinY enable 340R -pinBusDir host_frame_size right -pinBusY host_frame_size 360R -pinBusDir fd_host_addr right -pinBusY fd_host_addr 220R -pinBusDir fd_host_size right -pinBusY fd_host_size 240R -pinBusDir selftest_size right -pinBusY selftest_size 320R -pinBusDir half_frames_consumed_0 right -pinBusY half_frames_consumed_0 20R -pinBusDir half_frames_consumed_1 right -pinBusY half_frames_consumed_1 380R -pinBusDir hbm_temp_0 right -pinBusY hbm_temp_0 80R -pinBusDir hbm_temp_1 right -pinBusY hbm_temp_1 400R -pinDir cattrip_0 right -pinY cattrip_0 100R -pinDir cattrip_1 right -pinY cattrip_1 420R -pinDir cattrip left -pinY cattrip 80L -pinBusDir packets_req_0 right -pinBusY packets_req_0 160R -pinBusDir packets_req_1 right -pinBusY packets_req_1 440R -pinBusDir packets_sent_0 right -pinBusY packets_sent_0 180R -pinBusDir packets_sent_1 right -pinBusY packets_sent_1 460R -pinDir fifo_full_0 right -pinY fifo_full_0 60R -pinDir fifo_full_1 right -pinY fifo_full_1 480R -pinBusDir selftest_err_0 right -pinBusY selftest_err_0 120R -pinBusDir selftest_err_1 right -pinBusY selftest_err_1 500R -pinDir host_read_error_0 right -pinY host_read_error_0 200R -pinDir host_read_error_1 right -pinY host_read_error_1 520R -pinDir emitter_stall_0 right -pinY emitter_stall_0 260R -pinDir emitter_stall_1 right -pinY emitter_stall_1 540R -pinDir reader_halted_0 right -pinY reader_halted_0 40R -pinDir reader_halted_1 right -pinY reader_halted_1 560R -pinDir emitter_halted_0 right -pinY emitter_halted_0 140R -pinDir emitter_halted_1 right -pinY emitter_halted_1 580R -pinDir hbm_writer_halted_0 right -pinY hbm_writer_halted_0 280R -pinDir hbm_writer_halted_1 right -pinY hbm_writer_halted_1 600R -pinDir hbm_reader_halted_0 right -pinY hbm_reader_halted_0 300R -pinDir hbm_reader_halted_1 right -pinY hbm_reader_halted_1 620R -pinDir uw_writer_halted right -pinY uw_writer_halted 750R -pinDir send_stb right -pinY send_stb 640R -pinBusDir send_cnt right -pinBusY send_cnt 660R -pinDir use_sim_data right -pinY use_sim_data 680R -pinDir resetn_out right -pinY resetn_out 700R
+preplace inst feeder|channel_0|fd_emitter -pg 1 -lvl 3 -x 3010 -y 920 -swap {0 1 2 3 4 5 6 7 8 14 15 16 11 18 12 13 10 17 9 19} -defaultsOSRD -pinDir axis_in left -pinY axis_in 20L -pinDir axis_out right -pinY axis_out 20R -pinDir clk left -pinY clk 160L -pinDir resetn left -pinY resetn 180L -pinDir enable left -pinY enable 200L -pinDir halted left -pinY halted 100L -pinDir stall_error left -pinY stall_error 220L -pinBusDir packets_req left -pinBusY packets_req 120L -pinBusDir packets_sent left -pinBusY packets_sent 140L -pinDir local_send_stb left -pinY local_send_stb 60L -pinDir remote_send_stb right -pinY remote_send_stb 60R -pinBusDir local_send_cnt left -pinBusY local_send_cnt 40L -pinBusDir remote_send_cnt right -pinBusY remote_send_cnt 80R
+preplace inst feeder|channel_0|hbm_fifo -pg 1 -lvl 2 -x 2610 -y 490 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 14 15 16 18 13 17 19} -defaultsOSRD -pinDir axis_in left -pinY axis_in 20L -pinDir axis_out right -pinY axis_out 310R -pinDir hbm_refclk left -pinY hbm_refclk 80L -pinDir clk left -pinY clk 100L -pinDir soft_resetn left -pinY soft_resetn 120L -pinDir fifo_full left -pinY fifo_full 320L -pinBusDir hbm_temp left -pinBusY hbm_temp 340L -pinDir hbm_cattrip left -pinY hbm_cattrip 360L -pinDir hbm_reader_halted left -pinY hbm_reader_halted 400L -pinDir enable left -pinY enable 220L -pinDir hbm_writer_halted left -pinY hbm_writer_halted 380L -pinDir resetn left -pinY resetn 420L
+preplace inst feeder|channel_0|fifo_selftest -pg 1 -lvl 4 -x 3380 -y 780 -swap {5 1 2 3 4 0 6 7 8 10 11 12 9} -defaultsOSRD -pinDir i_pkt_in left -pinY i_pkt_in 40L -pinDir i_raw_in left -pinY i_raw_in 20L -pinDir clk left -pinY clk 80L -pinDir resetn left -pinY resetn 100L -pinBusDir selftest_size left -pinBusY selftest_size 120L -pinBusDir error left -pinBusY error 60L
+preplace inst feeder|channel_0|host_ram_reader -pg 1 -lvl 1 -x 2140 -y 290 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 48 50 49 51 47} -defaultsOSRD -pinDir axis_out right -pinY axis_out 220R -pinDir M_AXI left -pinY M_AXI 20L -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L -pinBusDir i_host_frame_size left -pinBusY i_host_frame_size 80L -pinBusDir i_fd_host_addr left -pinBusY i_fd_host_addr 100L -pinBusDir i_fd_host_size left -pinBusY i_fd_host_size 120L -pinDir i_enable left -pinY i_enable 160L -pinDir i_use_sim_data left -pinY i_use_sim_data 200L -pinDir halted left -pinY halted 180L -pinDir read_error left -pinY read_error 220L -pinBusDir half_frames_consumed left -pinBusY half_frames_consumed 140L
+preplace inst feeder|channel_1|fd_emitter -pg 1 -lvl 3 -x 5600 -y 1770 -swap {0 1 2 3 4 5 6 7 8 14 9 15 16 19 17 18 11 12 10 13} -defaultsOSRD -pinDir axis_in left -pinY axis_in 20L -pinDir axis_out right -pinY axis_out 20R -pinDir clk left -pinY clk 140L -pinDir resetn left -pinY resetn 40L -pinDir enable left -pinY enable 160L -pinDir halted left -pinY halted 240L -pinDir stall_error left -pinY stall_error 320L -pinBusDir packets_req left -pinBusY packets_req 260L -pinBusDir packets_sent left -pinBusY packets_sent 280L -pinDir local_send_stb left -pinY local_send_stb 80L -pinDir remote_send_stb left -pinY remote_send_stb 100L -pinBusDir local_send_cnt left -pinBusY local_send_cnt 60L -pinBusDir remote_send_cnt left -pinBusY remote_send_cnt 120L
+preplace inst feeder|channel_1|hbm_fifo -pg 1 -lvl 2 -x 5250 -y 1520 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 14 15 16 13 17 18 19} -defaultsOSRD -pinDir axis_in left -pinY axis_in 20L -pinDir axis_out right -pinY axis_out 170R -pinDir hbm_refclk left -pinY hbm_refclk 80L -pinDir clk left -pinY clk 100L -pinDir soft_resetn left -pinY soft_resetn 120L -pinDir fifo_full left -pinY fifo_full 160L -pinBusDir hbm_temp left -pinBusY hbm_temp 180L -pinDir hbm_cattrip left -pinY hbm_cattrip 200L -pinDir enable left -pinY enable 140L -pinDir hbm_writer_halted left -pinY hbm_writer_halted 220L -pinDir hbm_reader_halted left -pinY hbm_reader_halted 240L -pinDir resetn left -pinY resetn 260L
+preplace inst feeder|channel_1|fifo_selftest -pg 1 -lvl 4 -x 5960 -y 1670 -swap {5 1 2 3 4 0 6 7 8 9 10 11 12} -defaultsOSRD -pinDir i_pkt_in left -pinY i_pkt_in 40L -pinDir i_raw_in left -pinY i_raw_in 20L -pinDir clk left -pinY clk 60L -pinDir resetn left -pinY resetn 80L -pinBusDir selftest_size left -pinBusY selftest_size 100L -pinBusDir error left -pinBusY error 480L
+preplace inst feeder|channel_1|host_ram_reader -pg 1 -lvl 1 -x 4780 -y 1320 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 48 50 49 51 47} -defaultsOSRD -pinDir axis_out right -pinY axis_out 220R -pinDir M_AXI left -pinY M_AXI 20L -pinDir clk left -pinY clk 40L -pinDir resetn left -pinY resetn 60L -pinBusDir i_host_frame_size left -pinBusY i_host_frame_size 80L -pinBusDir i_fd_host_addr left -pinBusY i_fd_host_addr 100L -pinBusDir i_fd_host_size left -pinBusY i_fd_host_size 120L -pinDir i_enable left -pinY i_enable 160L -pinDir i_use_sim_data left -pinY i_use_sim_data 200L -pinDir halted left -pinY halted 180L -pinDir read_error left -pinY read_error 220L -pinBusDir half_frames_consumed left -pinBusY half_frames_consumed 140L
+preplace netloc axi_registers_0_uw_host_addr 1 2 2 6720 740 N
+preplace netloc axi_registers_0_uw_host_size 1 2 2 6660 680 N
+preplace netloc cmd_handler_packet_req_cnt 1 2 1 6380 160n
+preplace netloc cmd_handler_packet_req_stb 1 2 1 6420 180n
+preplace netloc ethernet_qsfp0_bad_packets 1 2 2 6520J 390 NJ
 preplace netloc ethernet_qsfp0_leds 1 4 1 N 410
-preplace netloc ethernet_qsfp1_bad_packets 1 2 2 860J 410 NJ
+preplace netloc ethernet_qsfp1_bad_packets 1 2 2 6560J 410 NJ
 preplace netloc ethernet_qsfp1_leds 1 4 1 N 430
-preplace netloc ethernet_rx0_aligned 1 2 2 800J 370 NJ
-preplace netloc ethernet_rx1_aligned 1 2 2 880J 430 NJ
-preplace netloc feeder_cattrip 1 0 2 NJ 270 340J
-preplace netloc feeder_enable 1 2 2 780 330 1180
-preplace netloc host_ram_writer_uw_dropped 1 2 2 NJ 720 N
-preplace netloc host_ram_writer_uw_written 1 2 2 NJ 700 N
-preplace netloc pcie_axi_aclk 1 1 3 380J 800 840 350 1200
-preplace netloc pcie_axi_aresetn 1 1 3 360J 190 740J 270 1220
-preplace netloc qsfp1_rx_host_writer_halted 1 2 2 NJ 470 1160
-preplace netloc qsfp1_rx_swapped 1 2 2 NJ 660 N
+preplace netloc ethernet_rx0_aligned 1 2 2 6500J 370 NJ
+preplace netloc ethernet_rx1_aligned 1 2 2 6620J 430 NJ
+preplace netloc feeder_cattrip 1 0 2 NJ 270 400J
+preplace netloc feeder_enable 1 2 2 6480 330 7020
+preplace netloc host_ram_writer_uw_dropped 1 2 2 6700J 720 N
+preplace netloc host_ram_writer_uw_written 1 2 2 6680J 700 N
+preplace netloc pcie_axi_aclk 1 1 3 440J 2540 6600 350 7040
+preplace netloc pcie_axi_aresetn 1 1 3 420J 190 6400J 270 7060
+preplace netloc qsfp1_rx_host_writer_halted 1 2 2 6540J 470 7000
+preplace netloc qsfp1_rx_swapped 1 2 2 6640J 660 N
 preplace netloc sys_rst_n_0_1 1 0 1 N 430
 preplace netloc PCIE_REFCLK0_1 1 0 1 NJ 390
 preplace netloc PCIE_REFCLK1_1 1 0 1 NJ 370
-preplace netloc S_AXI_1 1 1 1 NJ 370
+preplace netloc S_AXI_1 1 1 1 480J 370n
 preplace netloc ecd_axi_axis_out 1 2 2 NJ 60 N
 preplace netloc ethernet_axis_rx0 1 3 1 N 120
-preplace netloc ethernet_axis_rx1 1 4 1 1560 390n
+preplace netloc ethernet_axis_rx1 1 4 1 7400 390n
 preplace netloc ethernet_qsfp0_gt 1 4 1 N 80
 preplace netloc ethernet_qsfp1_gt 1 4 1 N 60
-preplace netloc feeder_M_AXI_FDATA0 1 1 1 NJ 390
-preplace netloc feeder_M_AXI_FDATA1 1 1 1 NJ 410
-preplace netloc feeder_axis_out0 1 2 2 NJ 310 N
-preplace netloc feeder_axis_out1 1 2 2 NJ 290 N
-preplace netloc hbm1_refclk_1 1 0 2 NJ 290 NJ
-preplace netloc hbm_refclk_1 1 0 2 NJ 250 NJ
-preplace netloc host_ram_writer_0_M_AXI 1 1 3 NJ 520 NJ 520 N
-preplace netloc pcie_M01_AXI 1 1 1 NJ 580
+preplace netloc feeder_M_AXI_FDATA0 1 1 1 460J 390n
+preplace netloc feeder_M_AXI_FDATA1 1 1 1 360J 410n
+preplace netloc feeder_axis_out0 1 2 2 6460J 310 N
+preplace netloc feeder_axis_out1 1 2 2 6440J 290 N
+preplace netloc hbm1_refclk_1 1 0 2 NJ 290 380J
+preplace netloc hbm_refclk_1 1 0 2 NJ 250 500J
+preplace netloc host_ram_writer_0_M_AXI 1 1 3 340J 2260 6580J 520 N
+preplace netloc pcie_M01_AXI 1 1 1 320J 580n
 preplace netloc pcie_M03_AXI 1 1 1 320 100n
 preplace netloc pcie_bridge_1_pcie_mgt 1 0 1 NJ 410
 preplace netloc pcie_bridge_2_pcie_mgt 1 0 1 NJ 350
 preplace netloc qsfp0_clk_1 1 4 1 N 120
 preplace netloc qsfp0_rx_axis_axi 1 2 1 NJ 120
 preplace netloc qsfp1_clk_1 1 4 1 N 100
-levelinfo -pg 1 0 170 550 1020 1390 1580
-pagesize -pg 1 -db -bbox -sgen -170 0 1740 810
+preplace netloc feeder|channel_0_emitter_halted 1 1 1 1100 1020n
+preplace netloc feeder|channel_0_emitter_stall 1 1 1 1540 1140n
+preplace netloc feeder|channel_0_error 1 1 1 1340 1000n
+preplace netloc feeder|channel_0_fifo_full 1 1 1 1200 810n
+preplace netloc feeder|channel_0_hbm_cattrip 1 1 1 1080 850n
+preplace netloc feeder|channel_0_hbm_reader_halted 1 1 1 1580 1180n
+preplace netloc feeder|channel_0_hbm_temp 1 1 1 1220 830n
+preplace netloc feeder|channel_0_hbm_writer_halted 1 1 1 1560 1160n
+preplace netloc feeder|channel_0_host_read_error 1 1 1 1500 1080n
+preplace netloc feeder|channel_0_packets_req 1 1 1 1140 1040n
+preplace netloc feeder|channel_0_packets_sent 1 1 1 1280 1060n
+preplace netloc feeder|channel_1_emitter_halted 1 1 2 NJ 1770 3800J
+preplace netloc feeder|channel_1_emitter_stall_error 1 1 2 NJ 1730 3780J
+preplace netloc feeder|channel_1_error 1 1 2 NJ 1690 3880J
+preplace netloc feeder|channel_1_fifo_full 1 1 2 NJ 1670 3960J
+preplace netloc feeder|channel_1_half_frames_consumed 1 1 2 NJ 1570 4080J
+preplace netloc feeder|channel_1_halted 1 1 2 NJ 1750 3940J
+preplace netloc feeder|channel_1_hbm_cattrip 1 1 2 NJ 1610 4000J
+preplace netloc feeder|channel_1_hbm_reader_halted 1 1 2 NJ 1810 3740J
+preplace netloc feeder|channel_1_hbm_temp 1 1 2 NJ 1590 4040J
+preplace netloc feeder|channel_1_hbm_writer_halted 1 1 2 NJ 1790 3760J
+preplace netloc feeder|channel_1_host_read_error 1 1 2 NJ 1710 3820J
+preplace netloc feeder|channel_1_packets_req 1 1 2 NJ 1630 3900J
+preplace netloc feeder|channel_1_packets_sent 1 1 2 NJ 1650 3860J
+preplace netloc feeder|control_cattrip 1 0 1 N 1270
+preplace netloc feeder|control_enable 1 1 3 1380 1270 4240 1250 NJ
+preplace netloc feeder|control_fd_host_addr 1 1 2 1400 1530 4120J
+preplace netloc feeder|control_fd_host_size 1 1 2 1420 1550 4100J
+preplace netloc feeder|control_host_frame_size 1 1 2 1240 1290 4220
+preplace netloc feeder|control_resetn_out 1 1 2 1360 1890 4060J
+preplace netloc feeder|control_send_cnt 1 1 2 1480 1850 4100J
+preplace netloc feeder|control_send_stb 1 1 2 1440 1830 4020J
+preplace netloc feeder|control_use_sim_data 1 1 2 1520 1870 3840J
+preplace netloc feeder|pcie_axi_aclk 1 0 3 680 1130 1460 1310 4200J
+preplace netloc feeder|pcie_axi_aresetn 1 0 3 640 1150 1320 1330 3920J
+preplace netloc feeder|ram_reader_0_half_frames_consumed 1 1 1 1160 690n
+preplace netloc feeder|ram_reader_0_halted 1 1 1 1180 730n
+preplace netloc feeder|remote_send_cnt_1 1 2 2 4140 1210 NJ
+preplace netloc feeder|remote_send_stb_1 1 2 2 4160 1230 NJ
+preplace netloc feeder|uw_writer_halted_1 1 1 3 N 1940 3720J 2230 NJ
+preplace netloc feeder|control_selftest_size 1 1 2 1600 1250 3980
+preplace netloc feeder|channel_1_M_AXI 1 0 3 NJ 1070 1260J 1350 3960
+preplace netloc feeder|channel_1_axis_out 1 3 1 6210 1190n
+preplace netloc feeder|fd_emitter_0_axis_out 1 2 2 N 990 NJ
+preplace netloc feeder|hbm_refclk_1 1 0 2 NJ 1090 1120
+preplace netloc feeder|hbm_refclk_1_1 1 0 3 NJ 1110 1300J 1370 4180
+preplace netloc feeder|pcie_M_AXI_B 1 0 1 660 1030n
+preplace netloc feeder|ram_reader_0_M_AXI 1 0 2 NJ 1050 1060
+preplace netloc feeder|channel_0|control_fd_host_size 1 0 1 1810 410n
+preplace netloc feeder|channel_0|control_resetn_out 1 0 4 1870 610 2390 1100 2810 880 NJ
+preplace netloc feeder|channel_0|control_send_cnt 1 0 3 NJ 770 2430J 960 N
+preplace netloc feeder|channel_0|control_send_stb 1 0 3 1930J 790 2370J 980 N
+preplace netloc feeder|channel_0|enable_1 1 0 3 1930 710 2330 1120 NJ
+preplace netloc feeder|channel_0|fd_emitter_halted 1 0 3 NJ 1020 NJ 1020 N
+preplace netloc feeder|channel_0|fd_emitter_packets_req 1 0 3 NJ 1040 NJ 1040 N
+preplace netloc feeder|channel_0|fd_emitter_packets_sent 1 0 3 NJ 1060 NJ 1060 N
+preplace netloc feeder|channel_0|fd_emitter_stall_error 1 0 3 NJ 1140 NJ 1140 N
+preplace netloc feeder|channel_0|fd_host_addr_1 1 0 1 1790 390n
+preplace netloc feeder|channel_0|fifo_selftest_error 1 0 4 NJ 1000 NJ 1000 2750J 780 3210
+preplace netloc feeder|channel_0|hbm_fifo_fifo_full 1 0 2 NJ 810 N
+preplace netloc feeder|channel_0|hbm_fifo_hbm_cattrip 1 0 2 NJ 850 N
+preplace netloc feeder|channel_0|hbm_fifo_hbm_reader_halted 1 0 2 NJ 1180 2410
+preplace netloc feeder|channel_0|hbm_fifo_hbm_temp 1 0 2 NJ 830 N
+preplace netloc feeder|channel_0|hbm_fifo_hbm_writer_halted 1 0 2 NJ 1160 2350
+preplace netloc feeder|channel_0|host_frame_size_1 1 0 1 1770 370n
+preplace netloc feeder|channel_0|host_ram_reader_0_half_frames_consumed 1 0 1 1850 430n
+preplace netloc feeder|channel_0|host_ram_reader_0_halted 1 0 1 1890 470n
+preplace netloc feeder|channel_0|host_ram_reader_read_error 1 0 1 1950 510n
+preplace netloc feeder|channel_0|pcie_axi_aclk 1 0 4 1830 590 2450 1080 2790 860 NJ
+preplace netloc feeder|channel_0|remote_send_cnt_1 1 3 2 N 1000 3510J
+preplace netloc feeder|channel_0|remote_send_stb_1 1 3 2 N 980 3530J
+preplace netloc feeder|channel_0|resetn_1 1 0 2 NJ 1200 2470
+preplace netloc feeder|channel_0|use_sim_data_1 1 0 1 1910 490n
+preplace netloc feeder|channel_0|selftest_size_1 1 0 4 NJ 1220 NJ 1220 NJ 1220 3250
+preplace netloc feeder|channel_0|fd_emitter_0_axis_out 1 3 2 3230 960 3550J
+preplace netloc feeder|channel_0|hbm_fifo_axis_out 1 2 2 2770 800 NJ
+preplace netloc feeder|channel_0|hbm_refclk_1 1 0 2 NJ 570 N
+preplace netloc feeder|channel_0|host_ram_reader_0_M_AXI 1 0 1 N 310
+preplace netloc feeder|channel_0|host_ram_reader_0_axis_out 1 1 1 N 510
+preplace netloc feeder|channel_1|control_fd_host_size 1 0 1 4450 1440n
+preplace netloc feeder|channel_1|control_resetn_out 1 0 4 4510 1640 4970 1480 5390 1730 5770J
+preplace netloc feeder|channel_1|control_send_cnt 1 0 3 NJ 1830 NJ 1830 N
+preplace netloc feeder|channel_1|control_send_stb 1 0 3 4410J 1850 NJ 1850 N
+preplace netloc feeder|channel_1|enable_1 1 0 3 4570 1740 5050 1930 NJ
+preplace netloc feeder|channel_1|fd_emitter_halted 1 0 3 NJ 2010 NJ 2010 N
+preplace netloc feeder|channel_1|fd_emitter_packets_req 1 0 3 NJ 2030 NJ 2030 N
+preplace netloc feeder|channel_1|fd_emitter_packets_sent 1 0 3 NJ 2050 NJ 2050 N
+preplace netloc feeder|channel_1|fd_emitter_stall_error 1 0 3 NJ 2090 NJ 2090 N
+preplace netloc feeder|channel_1|fd_host_addr_1 1 0 1 4430 1420n
+preplace netloc feeder|channel_1|fifo_selftest_error 1 0 4 NJ 1990 NJ 1990 5430J 2150 N
+preplace netloc feeder|channel_1|hbm_fifo_fifo_full 1 0 2 NJ 1930 4970
+preplace netloc feeder|channel_1|hbm_fifo_hbm_cattrip 1 0 2 NJ 1970 5010
+preplace netloc feeder|channel_1|hbm_fifo_hbm_reader_halted 1 0 2 NJ 2130 5090
+preplace netloc feeder|channel_1|hbm_fifo_hbm_temp 1 0 2 NJ 1950 4990
+preplace netloc feeder|channel_1|hbm_fifo_hbm_writer_halted 1 0 2 NJ 2110 5070
+preplace netloc feeder|channel_1|host_frame_size_1 1 0 1 4410 1400n
+preplace netloc feeder|channel_1|host_ram_reader_0_half_frames_consumed 1 0 1 4490 1460n
+preplace netloc feeder|channel_1|host_ram_reader_0_halted 1 0 1 4530 1500n
+preplace netloc feeder|channel_1|host_ram_reader_read_error 1 0 1 4590 1540n
+preplace netloc feeder|channel_1|pcie_axi_aclk 1 0 4 4470 1620 5030 1910 5410 1710 5790J
+preplace netloc feeder|channel_1|remote_send_cnt_1 1 0 3 NJ 1890 NJ 1890 N
+preplace netloc feeder|channel_1|remote_send_stb_1 1 0 3 NJ 1870 NJ 1870 N
+preplace netloc feeder|channel_1|resetn_1 1 0 2 NJ 2150 5110
+preplace netloc feeder|channel_1|use_sim_data_1 1 0 1 4550 1520n
+preplace netloc feeder|channel_1|selftest_size_1 1 0 4 NJ 2170 NJ 2170 NJ 2170 5830
+preplace netloc feeder|channel_1|fd_emitter_0_axis_out 1 3 2 5810 1630 NJ
+preplace netloc feeder|channel_1|hbm_fifo_axis_out 1 2 2 5430 1690 NJ
+preplace netloc feeder|channel_1|hbm_refclk_1 1 0 2 NJ 1600 N
+preplace netloc feeder|channel_1|host_ram_reader_0_M_AXI 1 0 1 N 1340
+preplace netloc feeder|channel_1|host_ram_reader_0_axis_out 1 1 1 N 1540
+levelinfo -pg 1 0 170 750 6860 7230 7420
+levelinfo -hier feeder * 870 1920 4520 *
+levelinfo -hier feeder|channel_0 * 2140 2610 3010 3380 *
+levelinfo -hier feeder|channel_1 * 4780 5250 5600 5960 *
+pagesize -pg 1 -db -bbox -sgen -170 0 7580 2550
+pagesize -hier feeder -db -bbox -sgen 610 220 6240 2240
+pagesize -hier feeder|channel_0 -db -bbox -sgen 1740 250 3580 1230
+pagesize -hier feeder|channel_1 -db -bbox -sgen 4380 1280 6120 2210
 ",
-   "No Loops_ScaleFactor":"0.695812",
-   "No Loops_TopLeft":"-170,-52",
+   "No Loops_ScaleFactor":"0.275386",
+   "No Loops_TopLeft":"345,606",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port SYSCLK2 -pg 1 -lvl 0 -x 0 -y 70 -defaultsOSRD

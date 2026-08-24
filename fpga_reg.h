@@ -206,6 +206,10 @@
 //              Bit  8 = Channel 1: Sequence check #0 failed
 //              Bit  9 = Channel 1: Sequence check #1 failed
 //              Bit 10 = Channel 1: Sequence check #2 failed
+//              Bit 16 = Channel 0: Host-RAM read error
+//              Bit 17 = Channel 1: Host-RAM read error
+//              Bit 18 = Channel 0: Frame-emitter stall
+//              Bit 19 = Channel 1: Frame-emitter stall
 //
 #define REG_SELFTEST_ERR                                             0x0000000000001050ULL
 
@@ -244,6 +248,29 @@
 // Description: The number of packets sent on channel 1
 //
 #define REG_CH1_PACKETS_SENT                                         0x400000000000106cULL
+
+
+//
+// Register:    REG_SELFTEST_SIZE
+// Size:        64-bits
+// Type:        Read/Write
+// Description: The size of the selftest-data address space.
+//              When USE_SIM_DATA = 1, this value should match FD_HOST_SIZE
+//
+#define REG_SELFTEST_SIZE                                            0x4000000000001074ULL
+
+
+//
+// Register:    REG_ENAB_SELFTEST_FAIL
+// Size:        32-bits
+// Type:        Read/Write
+// Description: Set this to 1 to enable reporting of sequence errors in the
+//              selftest-pattern.   This should be 0 when sending real
+//              (i.e., non-test-pattern) data.
+//              
+//              When USE_SIM_DATA = 1, this value should match FD_HOST_SIZE
+//
+#define REG_ENAB_SELFTEST_FAIL                                       0x000000000000107cULL
 
 
 //

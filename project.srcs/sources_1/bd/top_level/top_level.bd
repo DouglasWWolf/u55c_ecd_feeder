@@ -7,8 +7,7 @@
       "name": "top_level",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2024.2",
-      "validated": "true"
+      "tool_version": "2024.2"
     },
     "design_tree": {
       "pcie": {
@@ -433,17 +432,7 @@
       },
       "pcie_perst_l": {
         "type": "rst",
-        "direction": "I",
-        "parameters": {
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "POLARITY": {
-            "value": "ACTIVE_LOW",
-            "value_src": "default"
-          }
-        }
+        "direction": "I"
       },
       "qsfp0_leds": {
         "direction": "O",
@@ -2122,6 +2111,11 @@
               },
               "resetn": {
                 "direction": "I"
+              },
+              "selftest_size": {
+                "direction": "I",
+                "left": "63",
+                "right": "0"
               }
             },
             "components": {
@@ -6719,7 +6713,7 @@
                       }
                     }
                   },
-                  "fd_host_size": {
+                  "selftest_size": {
                     "direction": "I",
                     "left": "63",
                     "right": "0"
@@ -7230,7 +7224,6 @@
               "control_fd_host_size": {
                 "ports": [
                   "fd_host_size",
-                  "fifo_selftest/fd_host_size",
                   "host_ram_reader/i_fd_host_size"
                 ]
               },
@@ -7238,9 +7231,9 @@
                 "ports": [
                   "soft_resetn",
                   "hbm_fifo/soft_resetn",
-                  "fifo_selftest/resetn",
                   "fd_emitter/resetn",
-                  "host_ram_reader/resetn"
+                  "host_ram_reader/resetn",
+                  "fifo_selftest/resetn"
                 ]
               },
               "control_send_cnt": {
@@ -7357,9 +7350,9 @@
                 "ports": [
                   "clk",
                   "hbm_fifo/clk",
-                  "fifo_selftest/clk",
                   "fd_emitter/clk",
-                  "host_ram_reader/clk"
+                  "host_ram_reader/clk",
+                  "fifo_selftest/clk"
                 ]
               },
               "remote_send_cnt_1": {
@@ -7378,6 +7371,12 @@
                 "ports": [
                   "resetn",
                   "hbm_fifo/resetn"
+                ]
+              },
+              "selftest_size_1": {
+                "ports": [
+                  "selftest_size",
+                  "fifo_selftest/selftest_size"
                 ]
               },
               "use_sim_data_1": {
@@ -7503,6 +7502,11 @@
               },
               "resetn": {
                 "direction": "I"
+              },
+              "selftest_size": {
+                "direction": "I",
+                "left": "63",
+                "right": "0"
               }
             },
             "components": {
@@ -12111,7 +12115,7 @@
                       }
                     }
                   },
-                  "fd_host_size": {
+                  "selftest_size": {
                     "direction": "I",
                     "left": "63",
                     "right": "0"
@@ -12627,7 +12631,6 @@
               "control_fd_host_size": {
                 "ports": [
                   "fd_host_size",
-                  "fifo_selftest/fd_host_size",
                   "host_ram_reader/i_fd_host_size"
                 ]
               },
@@ -12635,9 +12638,9 @@
                 "ports": [
                   "soft_resetn",
                   "hbm_fifo/soft_resetn",
-                  "fifo_selftest/resetn",
                   "fd_emitter/resetn",
-                  "host_ram_reader/resetn"
+                  "host_ram_reader/resetn",
+                  "fifo_selftest/resetn"
                 ]
               },
               "control_send_cnt": {
@@ -12754,9 +12757,9 @@
                 "ports": [
                   "clk",
                   "hbm_fifo/clk",
-                  "fifo_selftest/clk",
                   "fd_emitter/clk",
-                  "host_ram_reader/clk"
+                  "host_ram_reader/clk",
+                  "fifo_selftest/clk"
                 ]
               },
               "remote_send_cnt_1": {
@@ -12775,6 +12778,12 @@
                 "ports": [
                   "resetn",
                   "hbm_fifo/resetn"
+                ]
+              },
+              "selftest_size_1": {
+                "ports": [
+                  "selftest_size",
+                  "fifo_selftest/selftest_size"
                 ]
               },
               "use_sim_data_1": {
@@ -12809,10 +12818,6 @@
                   "PROTOCOL": {
                     "value": "AXI4LITE",
                     "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "250000000",
-                    "value_src": "user_prop"
                   },
                   "ID_WIDTH": {
                     "value": "0",
@@ -12897,26 +12902,6 @@
                   "MAX_BURST_LENGTH": {
                     "value": "1",
                     "value_src": "auto"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "top_level_xdma_0_0_axi_aclk",
-                    "value_src": "default_prop"
-                  },
-                  "NUM_READ_THREADS": {
-                    "value": "1",
-                    "value_src": "user_prop"
-                  },
-                  "NUM_WRITE_THREADS": {
-                    "value": "1",
-                    "value_src": "user_prop"
-                  },
-                  "RUSER_BITS_PER_BYTE": {
-                    "value": "0",
-                    "value_src": "user_prop"
-                  },
-                  "WUSER_BITS_PER_BYTE": {
-                    "value": "0",
-                    "value_src": "user_prop"
                   }
                 },
                 "memory_map_ref": "S_AXI",
@@ -13030,14 +13015,6 @@
                   "ASSOCIATED_RESET": {
                     "value": "resetn",
                     "value_src": "constant"
-                  },
-                  "FREQ_HZ": {
-                    "value": "250000000",
-                    "value_src": "user_prop"
-                  },
-                  "CLK_DOMAIN": {
-                    "value": "top_level_xdma_0_0_axi_aclk",
-                    "value_src": "default_prop"
                   }
                 }
               },
@@ -13065,6 +13042,11 @@
                 "right": "0"
               },
               "fd_host_size": {
+                "direction": "O",
+                "left": "63",
+                "right": "0"
+              },
+              "selftest_size": {
                 "direction": "O",
                 "left": "63",
                 "right": "0"
@@ -13419,6 +13401,13 @@
               "control/resetn_out",
               "channel_0/soft_resetn",
               "channel_1/soft_resetn"
+            ]
+          },
+          "control_selftest_size": {
+            "ports": [
+              "control/selftest_size",
+              "channel_0/selftest_size",
+              "channel_1/selftest_size"
             ]
           },
           "control_send_cnt": {

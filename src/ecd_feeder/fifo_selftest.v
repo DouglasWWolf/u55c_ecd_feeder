@@ -25,10 +25,10 @@ module fifo_selftest #
     input   clk,
     input   resetn,
 
-    // The size of the frame-data buffer in host-RAM.  We need this
-    // to accurately compute the simulation-data that we expect
-    // to see.
-    input[63:0]     fd_host_size,
+    // The size of the test-pattern address space.  When we're using
+    // simulated data, this should be the same size as the host-RAM
+    // frame-data ring buffer.
+    input[63:0]     selftest_size,
 
     // Error bits
     output reg[7:0] error,
@@ -115,7 +115,7 @@ reg[63:0] maybe_sim_data;
 //-----------------------------------------------------------------------------
 always @* begin
     maybe_sim_data = sim_data + 64 + (raw_in_tlast ? BURST_SIZE : 0);
-    if (maybe_sim_data < fd_host_size)
+    if (maybe_sim_data < selftest_size)
         next_sim_data = maybe_sim_data;
     else
         next_sim_data = FIRST_RAM_OFFSET;

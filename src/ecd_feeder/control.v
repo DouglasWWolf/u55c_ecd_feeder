@@ -28,6 +28,9 @@ module control # (parameter AW=8)
     // The address and size of the frame-data buffer in host-RAM
     output reg [63:0] fd_host_addr, fd_host_size,
 
+    // The size of the self-test data address space
+    output reg [63:0] selftest_size,
+
     // The number of frames consumed from host-RAM
     input [63:0] half_frames_consumed_0, half_frames_consumed_1,
 
@@ -211,6 +214,10 @@ localparam REG_HBM1_TEMP = 19;
     @rdesc    Bit  8 = Channel 1: Sequence check #0 failed
     @rdesc    Bit  9 = Channel 1: Sequence check #1 failed
     @rdesc    Bit 10 = Channel 1: Sequence check #2 failed
+    @rdesc    Bit 16 = Channel 0: Host-RAM read error
+    @rdesc    Bit 17 = Channel 1: Host-RAM read error
+    @rdesc    Bit 18 = Channel 0: Frame-emitter stall
+    @rdesc    Bit 19 = Channel 1: Frame-emitter stall
     @rtype r/o
 */
 localparam REG_SELFTEST_ERR = 20;
@@ -253,6 +260,26 @@ localparam REG_CH0_PACKETS_SENT_L = 26;
 */
 localparam REG_CH1_PACKETS_SENT_H = 27;
 localparam REG_CH1_PACKETS_SENT_L = 28;
+
+/*
+    @register The size of the selftest-data address space.
+    @rdesc    When USE_SIM_DATA = 1, this value should match FD_HOST_SIZE
+    @rname REG_SELFTEST_SIZE
+    @rsize 64
+*/
+
+localparam REG_SELFTEST_SIZE_H = 29;
+localparam REG_SELFTEST_SIZE_L = 30;
+
+/*
+    @register Set this to 1 to enable reporting of sequence errors in the
+    @rdesc    selftest-pattern.   This should be 0 when sending real 
+    @rdesc    (i.e., non-test-pattern) data.
+    @rdesc 
+    @rdesc    When USE_SIM_DATA = 1, this value should match FD_HOST_SIZE
+*/
+localparam REG_ENAB_SELFTEST_FAIL = 31;
+
 //==========================================================================
 
 
@@ -317,6 +344,10 @@ reg[31:0] packets_sent_l[0:1];
 // If either HBM bank shows a catastrophic temperature, shut down the FPGA!
 assign cattrip = cattrip_0 | cattrip_1;
 
+// When this is asserted, we report self-test sequencing errors
+reg enab_selftest_fail;
+
+
 //=============================================================================
 // Compute the number of whole frames consumed by doubling the 
 // number of half-frames consumed from the channel with the fewest
@@ -361,11 +392,12 @@ always @(posedge clk) begin
 
     // If we're in reset, initialize important registers
     if (resetn == 0) begin
-        ashi_write_state  <= 0;
-        host_frame_size   <= 32'h40_0000;
-        fd_host_addr      <= 64'h1_0000_0000;
-        fd_host_size      <= 64'h4_0000_0000;
-        use_sim_data      <= 0;
+        ashi_write_state   <= 0;
+        host_frame_size    <= 32'h40_0000;
+        fd_host_addr       <= 64'h1_0000_0000;
+        fd_host_size       <= 64'h4_0000_0000;
+        use_sim_data       <= 0;
+        enab_selftest_fail <= 0;
     end
 
     // Otherwise, we're not in reset...
@@ -392,12 +424,17 @@ always @(posedge clk) begin
                         if (ashi_wdata[0] & !enable) begin
                             start_stb <= 1;
                         end
-                    REG_USE_SIM_DATA:    if (!enable) use_sim_data        <= ashi_wdata;
-                    REG_HOST_FRAME_SIZE: if (!enable) host_frame_size     <= ashi_wdata;
-                    REG_FD_HOST_ADDR_H:  if (!enable) fd_host_addr[63:32] <= ashi_wdata;
-                    REG_FD_HOST_ADDR_L:  if (!enable) fd_host_addr[31:00] <= ashi_wdata;
-                    REG_FD_HOST_SIZE_H:  if (!enable) fd_host_size[63:32] <= ashi_wdata;
-                    REG_FD_HOST_SIZE_L:  if (!enable) fd_host_size[31:00] <= ashi_wdata;
+
+                    REG_ENAB_SELFTEST_FAIL: enab_selftest_fail <= ashi_wdata;
+
+                    REG_USE_SIM_DATA:    if (!enable) use_sim_data         <= ashi_wdata;
+                    REG_HOST_FRAME_SIZE: if (!enable) host_frame_size      <= ashi_wdata;
+                    REG_FD_HOST_ADDR_H:  if (!enable) fd_host_addr [63:32] <= ashi_wdata;
+                    REG_FD_HOST_ADDR_L:  if (!enable) fd_host_addr [31:00] <= ashi_wdata;
+                    REG_FD_HOST_SIZE_H:  if (!enable) fd_host_size [63:32] <= ashi_wdata;
+                    REG_FD_HOST_SIZE_L:  if (!enable) fd_host_size [31:00] <= ashi_wdata;
+                    REG_SELFTEST_SIZE_H: if (!enable) selftest_size[63:32] <= ashi_wdata;
+                    REG_SELFTEST_SIZE_L: if (!enable) selftest_size[31:00] <= ashi_wdata;
 
 
                     // Writes to any other register are a decode-error
@@ -442,10 +479,13 @@ always @(posedge clk) begin
             REG_USE_SIM_DATA:       ashi_rdata <= use_sim_data;
             REG_HOST_FRAME_SIZE:    ashi_rdata <= host_frame_size;
 
-            REG_FD_HOST_ADDR_H:     ashi_rdata <= fd_host_addr[63:32];
-            REG_FD_HOST_ADDR_L:     ashi_rdata <= fd_host_addr[31:00];            
-            REG_FD_HOST_SIZE_H:     ashi_rdata <= fd_host_size[63:32];
-            REG_FD_HOST_SIZE_L:     ashi_rdata <= fd_host_size[31:00];            
+            REG_FD_HOST_ADDR_H:     ashi_rdata <= fd_host_addr [63:32];
+            REG_FD_HOST_ADDR_L:     ashi_rdata <= fd_host_addr [31:00];            
+            REG_FD_HOST_SIZE_H:     ashi_rdata <= fd_host_size [63:32];
+            REG_FD_HOST_SIZE_L:     ashi_rdata <= fd_host_size [31:00];
+            REG_SELFTEST_SIZE_H:    ashi_rdata <= selftest_size[63:32];
+            REG_SELFTEST_SIZE_L:    ashi_rdata <= selftest_size[31:00];
+            REG_ENAB_SELFTEST_FAIL: ashi_rdata <= enab_selftest_fail;
 
             REG_HBM0_TEMP:          ashi_rdata <= hbm_temp_0;
             REG_HBM1_TEMP:          ashi_rdata <= hbm_temp_1;
@@ -456,8 +496,8 @@ always @(posedge clk) begin
                                         emitter_stall_0,
                                         host_read_error_1,
                                         host_read_error_0,
-                                        (use_sim_data) ? selftest_err_1 : 8'h0,
-                                        (use_sim_data) ? selftest_err_0 : 8'h0
+                                        (enab_selftest_fail) ? selftest_err_1 : 8'h0,
+                                        (enab_selftest_fail) ? selftest_err_0 : 8'h0
                                     };
 
             REG_FRM_CONSUMED_H:
