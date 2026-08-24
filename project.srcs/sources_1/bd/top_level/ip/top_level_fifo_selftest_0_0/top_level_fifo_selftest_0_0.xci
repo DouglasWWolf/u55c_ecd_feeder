@@ -2,7 +2,7 @@
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
     "xci_name": "top_level_fifo_selftest_0_0",
-    "cell_name": "fifo_selftest",
+    "cell_name": "feeder/channel_0/fifo_selftest",
     "component_reference": "xilinx.com:module_ref:fifo_selftest:1.0",
     "ip_revision": "1",
     "gen_directory": "../../../../../../project.gen/sources_1/bd/top_level/ip/top_level_fifo_selftest_0_0",

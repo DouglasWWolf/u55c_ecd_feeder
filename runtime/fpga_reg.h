@@ -267,8 +267,6 @@
 // Description: Set this to 1 to enable reporting of sequence errors in the
 //              selftest-pattern.   This should be 0 when sending real
 //              (i.e., non-test-pattern) data.
-//              
-//              When USE_SIM_DATA = 1, this value should match FD_HOST_SIZE
 //
 #define REG_ENAB_SELFTEST_FAIL                                       0x000000000000107cULL
 

@@ -275,8 +275,6 @@ localparam REG_SELFTEST_SIZE_L = 30;
     @register Set this to 1 to enable reporting of sequence errors in the
     @rdesc    selftest-pattern.   This should be 0 when sending real 
     @rdesc    (i.e., non-test-pattern) data.
-    @rdesc 
-    @rdesc    When USE_SIM_DATA = 1, this value should match FD_HOST_SIZE
 */
 localparam REG_ENAB_SELFTEST_FAIL = 31;
 
