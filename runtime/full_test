@@ -72,8 +72,11 @@ log ecdcom reset complete
 # Wait for any in-flight packets to get tossed into the bit-bucket
 sleep 1
 
-# For this test, ecd-feeder will use simulated data
+# For this test, ecd-feeder will use simulated data, and we
+# enable reporting of errors in the selftest test-pattern
 axi REG_USE_SIM_DATA 1
+axi REG_SELFTEST_SIZE $host_ram_fd_size
+axi REG_ENAB_SELFTEST_FAIL 1
 
 # A frame is 0x40_0000 bytes (i.e., 4MB)
 axi REG_HOST_FRAME_SIZE 0x400000
@@ -152,4 +155,5 @@ echo "ECDCOM_START          = " $(ecd -dec ECDCOM_START)
 echo "ECDCOM_READY          = " $(ecd -dec ECDCOM_READY)
 echo "ECDCOM_LVDS_UNDERFLOW = " $(ecd -dec ECDCOM_LVDS_UNDERFLOW)
 echo "ECDCOM_SELFTEST_ERR   = " $(ecd -dec ECDCOM_SELFTEST_ERR)
+echo "REG_SELFTEST_ERR      = " $(get      REG_SELFTEST_ERR)
 
