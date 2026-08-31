@@ -11,9 +11,12 @@
 //
 //   1.4.0  24-Aug-26  DWW  Added REG_ENAB_SELFTEST_FAIL and REG_SELFTEST_SIZE
 //                          Cleaned up register-documentation in control.v
+//
+//   1.5.0  31-Aug-26  DWW  Fixed bug wherein the count of received UW packets was not zeroed
+//                          during system-reset
 //================================================================================================
 localparam VERSION_MAJOR = 1;
-localparam VERSION_MINOR = 4;
+localparam VERSION_MINOR = 5;
 localparam VERSION_BUILD = 0;
 localparam VERSION_RCAND = 0; 
 localparam RTL_TYPE      = 7426;

@@ -7,7 +7,8 @@
       "name": "top_level",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2024.2"
+      "tool_version": "2024.2",
+      "validated": "true"
     },
     "design_tree": {
       "pcie": {
@@ -432,7 +433,17 @@
       },
       "pcie_perst_l": {
         "type": "rst",
-        "direction": "I"
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
       },
       "qsfp0_leds": {
         "direction": "O",
@@ -1993,6 +2004,9 @@
           },
           "uw_writer_halted": {
             "direction": "I"
+          },
+          "soft_resetn": {
+            "direction": "O"
           }
         },
         "components": {
@@ -12819,6 +12833,10 @@
                     "value": "AXI4LITE",
                     "value_src": "constant"
                   },
+                  "FREQ_HZ": {
+                    "value": "250000000",
+                    "value_src": "user_prop"
+                  },
                   "ID_WIDTH": {
                     "value": "0",
                     "value_src": "constant"
@@ -12902,6 +12920,26 @@
                   "MAX_BURST_LENGTH": {
                     "value": "1",
                     "value_src": "auto"
+                  },
+                  "CLK_DOMAIN": {
+                    "value": "top_level_xdma_0_0_axi_aclk",
+                    "value_src": "default_prop"
+                  },
+                  "NUM_READ_THREADS": {
+                    "value": "1",
+                    "value_src": "user_prop"
+                  },
+                  "NUM_WRITE_THREADS": {
+                    "value": "1",
+                    "value_src": "user_prop"
+                  },
+                  "RUSER_BITS_PER_BYTE": {
+                    "value": "0",
+                    "value_src": "user_prop"
+                  },
+                  "WUSER_BITS_PER_BYTE": {
+                    "value": "0",
+                    "value_src": "user_prop"
                   }
                 },
                 "memory_map_ref": "S_AXI",
@@ -13015,6 +13053,14 @@
                   "ASSOCIATED_RESET": {
                     "value": "resetn",
                     "value_src": "constant"
+                  },
+                  "FREQ_HZ": {
+                    "value": "250000000",
+                    "value_src": "user_prop"
+                  },
+                  "CLK_DOMAIN": {
+                    "value": "top_level_xdma_0_0_axi_aclk",
+                    "value_src": "default_prop"
                   }
                 }
               },
@@ -13400,7 +13446,8 @@
             "ports": [
               "control/resetn_out",
               "channel_0/soft_resetn",
-              "channel_1/soft_resetn"
+              "channel_1/soft_resetn",
+              "soft_resetn"
             ]
           },
           "control_selftest_size": {
@@ -17117,6 +17164,9 @@
           },
           "host_writer_halted": {
             "direction": "O"
+          },
+          "soft_resetn": {
+            "direction": "I"
           }
         },
         "components": {
@@ -18041,7 +18091,6 @@
           "feeder_resetn_out": {
             "ports": [
               "resetn",
-              "host_ram_writer/resetn",
               "swap_detect/resetn",
               "router/resetn"
             ]
@@ -18070,6 +18119,12 @@
               "host_ram_writer/clk",
               "swap_detect/clk",
               "router/clk"
+            ]
+          },
+          "soft_resetn_1": {
+            "ports": [
+              "soft_resetn",
+              "host_ram_writer/resetn"
             ]
           },
           "swap_detect_0_swapped": {
@@ -18962,6 +19017,12 @@
         "ports": [
           "qsfp1_rx/swapped",
           "axi_registers/swapped_cables"
+        ]
+      },
+      "soft_resetn_1": {
+        "ports": [
+          "feeder/soft_resetn",
+          "qsfp1_rx/soft_resetn"
         ]
       },
       "sys_rst_n_0_1": {

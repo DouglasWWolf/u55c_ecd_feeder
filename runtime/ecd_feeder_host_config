@@ -8,3 +8,8 @@ host_ram_fd_addr=0x100000000
 # How big is the host-RAM frame data buffer?
 host_ram_fd_size=0x800000000
 
+# Where in host-RAM is userwave data stored?
+host_ram_uw_addr=0x100000000
+
+# How big is the host-RAM userwave data buffer?
+host_ram_uw_size=0x80000000 

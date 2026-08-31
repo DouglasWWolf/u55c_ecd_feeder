@@ -1,0 +1,67 @@
+#
+# This script configures the location and size of the UW
+# ring buffer in host-RAM, then asks indy_ecdcom to send
+# a script-defined number of packets with a script-defined
+# delay between them.
+#
+# Make sure that REG_UW_HOST_ADDR and REG_UW_HOST_SIZE
+# point to a legitimate reserved buffer on your machine
+# before running this script!
+#
+source api
+
+# Determine how many packets we're going to ask indy_ecdcom to send us
+packets=10
+if [ ! -z $1 ]; then
+    packets=$1
+    shift
+fi
+
+# Fetch the host RAM configuration
+fn=~/ecd_feeder_host_config
+if [ -f $fn ]; then
+    source ~/ecd_feeder_host_config
+else
+    echo "$fn not found!"
+    exit 1
+fi
+
+# This is the address of the host-RAM ring-buffer where
+# we're going to store the received userwave-data
+axi REG_UW_HOST_ADDR $host_ram_uw_addr
+
+# This is the size of the host-RAM ring-buffer that holds UW data
+axi REG_UW_HOST_SIZE $host_ram_uw_size
+
+# How many UW packets have we received up to this point?
+rcvd=$(get REG_UW_WRITTEN)
+
+# Display the number of UW packets we've received 
+# prior to requesting this next set of packets
+printf "Before we start, we've rcvd %u UW packets\n" $rcvd
+
+# 100 data-cycles between userwave-data packets
+# 1 data-cycle is 4 ns
+ecd ECDCOM_UW_IPG 100
+
+# Tell indy_ecdcom how many UW packets we want it to send
+ecd ECDCOM_UW_LIMIT $packets
+
+# Tell indy_ecdcom to start sending!
+ecd ECDCOM_UW_START 1
+
+# Wait until the number of received packets
+# stops changing
+while :; do
+    sleep .1
+    new_rcvd=$(get REG_UW_WRITTEN)
+    test $new_rcvd -eq $rcvd && break
+    rcvd=$new_rcvd
+done
+
+# Display the number of UW packets we've received 
+printf "We have now received a total of %u UW packets\n" $rcvd
+
+
+
+

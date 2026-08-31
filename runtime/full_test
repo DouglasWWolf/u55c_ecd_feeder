@@ -109,6 +109,9 @@ while [ $(ecd -dec ECDCOM_READY) -ne 1 ]; do
 done
 log ecdcom buffers filled
 
+# If we're not telling indy_ecdcom to send frames, we're done
+test $frame_count -eq 0 && exit 0
+
 # Tell the ECD to demand a large number of frames of data
 log ecdcom demanding frames
 ecd ECDCOM_GET_FRAMES $frame_count
